@@ -45,7 +45,7 @@ struct MockRelay {
     #[clap(
         long,
         help = "URL of the execution engine",
-        default_value = "http://localhost:8545"
+        default_value = "http://localhost:8551"
     )]
     execution_endpoint: String,
     #[clap(
@@ -77,11 +77,11 @@ async fn main() -> color_eyre::eyre::Result<()> {
 
     tracing::info!("Starting mock relay");
 
+    // Setup auth for execution layer client.
     let auth_str = std::fs::read_to_string(relay_config.jwt_secret)?;
     let secret =
         JwtKey::from_slice(&hex::decode(strip_prefix(auth_str.as_str()))?).map_err(|e| eyre!(e))?;
     let auth = Auth::new(secret, None, None);
-
     let url = SensitiveUrl::parse(relay_config.execution_endpoint.as_str())
         .map_err(|e| eyre!(format!("{e:?}")))?;
     let client = HttpJsonRpc::new_with_auth(url, auth).map_err(|e| eyre!(format!("{e:?}")))?;
@@ -93,7 +93,11 @@ async fn main() -> color_eyre::eyre::Result<()> {
         payload_cache: RwLock::new(LruCache::new(10)),
     });
 
-    serve(context).await
+    serve(context).await?;
+
+    tracing::info!("Shutdown complete.");
+
+    Ok(())
 }
 
 pub struct Context {
@@ -116,8 +120,8 @@ pub async fn serve(ctx: Arc<Context>) -> Result<(), eyre::Error> {
         .and_then(|body: serde_json::Value, ctx: Arc<Context>| async move {
             let id = body
                 .get("id")
-                .and_then(serde_json::Value::as_u64)
-                .ok_or_else(|| warp::reject::custom(MissingIdField))?;
+                .ok_or_else(|| warp::reject::custom(MissingIdField))?
+                .clone();
 
             let response = match handle_relay_rpc(body, ctx).await {
                 Ok(result) => json!({
@@ -153,7 +157,8 @@ pub async fn serve(ctx: Arc<Context>) -> Result<(), eyre::Error> {
         async {
             tokio::signal::ctrl_c()
                 .await
-                .expect("Unable to listen for ctrl-c")
+                .expect("Unable to listen for ctrl-c");
+            tracing::info!("Shutting down...");
         },
     )?;
 

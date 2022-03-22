@@ -19,7 +19,6 @@ serde_json = "1.0.79"
 execution_layer = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 types = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 task_executor = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
-sloggers = "2.1.1"
 warp_utils = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 sensitive_url = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 exit-future = "0.2.0"
@@ -32,3 +31,9 @@ eth2_serde_utils = { git = "https://github.com/realbigsean/lighthouse", branch =
 eth2_ssz_types = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 tree_hash = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
 eth2_ssz = { git = "https://github.com/realbigsean/lighthouse", branch = "kiln-mev-boost" }
+
+[patch."https://github.com/slog-rs/stdlog"]
+slog-stdlog = "=4.0.0"
+
+[patch."https://github.com/rust-lang/log"]
+log = "=0.4.11"
