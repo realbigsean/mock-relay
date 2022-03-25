@@ -10,7 +10,6 @@ use execution_layer::json_structures::{
     JsonExecutionPayloadHeaderV1, JsonExecutionPayloadV1, JsonForkchoiceUpdatedV1Response,
     JsonPayloadIdRequest,
 };
-use execution_layer::EngineApi;
 use execution_layer::HttpJsonRpc;
 use lru::LruCache;
 use parking_lot::lock_api::RwLock;
