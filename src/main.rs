@@ -283,7 +283,7 @@ pub async fn handle_relay_rpc(body: JsonValue, ctx: Arc<Context>) -> eyre::Resul
 fn get_param<T: DeserializeOwned>(params: &JsonValue, index: usize) -> eyre::Result<T> {
     params
         .get(index)
-        .ok_or_else(|| eyre!("missing/invalid params[{}] value", index))
+        .ok_or_else(|| eyre!("missing/invalid params[{index}] value"))
         .and_then(|param| {
             serde_json::from_value(param.clone())
                 .map_err(|e| eyre!("failed to deserialize param[{}]: {:?}", index, e))
