@@ -5,7 +5,7 @@ use execution_layer::test_utils::MockBuilderContext;
 use execution_layer::Config;
 use mev_build_rs::ApiServer;
 use sensitive_url::SensitiveUrl;
-use sloggers::Build;
+use slog::Logger;
 use std::net::Ipv4Addr;
 use std::path::PathBuf;
 use std::time::Duration;
@@ -67,13 +67,17 @@ async fn main() -> color_eyre::eyre::Result<()> {
 
     let url = SensitiveUrl::parse(relay_config.execution_endpoint.as_str())
         .map_err(|e| eyre!(format!("{e:?}")))?;
-    let null_logger = sloggers::null::NullLoggerBuilder.build().unwrap();
+
+    // Convert slog logs from the EL to tracing logs.
+    let drain = tracing_slog::TracingSlogDrain;
+    let log_root = Logger::root(drain, slog::o!());
+
     let (shutdown_tx, _shutdown_rx) = futures_channel::mpsc::channel::<ShutdownReason>(1);
     let (_signal, exit) = exit_future::signal();
     let task_executor = task_executor::TaskExecutor::new(
         tokio::runtime::Handle::current(),
         exit,
-        null_logger.clone(),
+        log_root.clone(),
         shutdown_tx,
     );
 
@@ -86,7 +90,7 @@ async fn main() -> color_eyre::eyre::Result<()> {
     let el = execution_layer::ExecutionLayer::<MainnetEthSpec>::from_config(
         config,
         task_executor,
-        null_logger,
+        log_root,
     )
     .unwrap();
 

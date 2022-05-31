@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "account_utils"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "directory",
  "eth2_keystore",
@@ -300,7 +300,7 @@ checksum = "dea908e7347a8c64e378c17e30ef880ad73e3b4498346b055c2c00ea342f3179"
 [[package]]
 name = "beacon-api-client"
 version = "0.1.0"
-source = "git+https://github.com/ralexstokes/beacon-api-client#8b50aac570657027130164f0f51c60fe156fed1f"
+source = "git+https://github.com/ralexstokes/beacon-api-client#2f724c18d7e9184dc0f499d4781d8b8086e4f5b6"
 dependencies = [
  "ethereum-consensus",
  "http",
@@ -312,86 +312,6 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "url",
-]
-
-[[package]]
-name = "beacon_chain"
-version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "bitvec 0.20.4",
- "bls",
- "derivative",
- "eth1",
- "eth2",
- "eth2_hashing",
- "eth2_ssz",
- "eth2_ssz_derive",
- "eth2_ssz_types",
- "execution_layer",
- "exit-future",
- "fork_choice",
- "futures",
- "genesis",
- "hex",
- "int_to_bytes",
- "itertools",
- "lazy_static",
- "lighthouse_metrics",
- "logging",
- "lru",
- "merkle_proof",
- "operation_pool",
- "parking_lot 0.12.0",
- "proto_array",
- "rand 0.8.5",
- "rayon",
- "safe_arith",
- "sensitive_url",
- "serde",
- "serde_derive",
- "slasher",
- "slog",
- "sloggers",
- "slot_clock",
- "smallvec",
- "state_processing",
- "store",
- "strum",
- "superstruct",
- "task_executor",
- "tempfile",
- "tokio",
- "tree_hash",
- "types",
-]
-
-[[package]]
-name = "bincode"
-version = "1.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "bindgen"
-version = "0.59.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2bd2a9a458e8f4304c52c43ebb0cfbd520289f8379a52e329a38afda99bf8eb8"
-dependencies = [
- "bitflags",
- "cexpr",
- "clang-sys",
- "lazy_static",
- "lazycell",
- "peeking_take_while",
- "proc-macro2",
- "quote",
- "regex",
- "rustc-hash",
- "shlex",
 ]
 
 [[package]]
@@ -461,7 +381,7 @@ checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
 [[package]]
 name = "bls"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "blst",
  "eth2_hashing",
@@ -507,7 +427,7 @@ dependencies = [
 [[package]]
 name = "builder_client"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2",
  "reqwest",
@@ -567,7 +487,7 @@ dependencies = [
 [[package]]
 name = "cached_tree_hash"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_hashing",
  "eth2_ssz",
@@ -583,15 +503,6 @@ name = "cc"
 version = "1.0.73"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2fff2a6927b3bb87f9595d67196a70493f627687a71d87a0d692242c33f58c11"
-
-[[package]]
-name = "cexpr"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6fac387a98bb7c37292057cffc56d62ecb629900026402633ae9160df93a8766"
-dependencies = [
- "nom 7.1.1",
-]
 
 [[package]]
 name = "cfg-if"
@@ -644,17 +555,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7ee52072ec15386f770805afd189a01c8841be8696bed250fa2f13c4c0d6dfb7"
 dependencies = [
  "generic-array",
-]
-
-[[package]]
-name = "clang-sys"
-version = "1.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf6b561dcf059c85bbe388e0a7b0a1469acb3934cc0cfa148613a830629e3049"
-dependencies = [
- "glob",
- "libc",
- "libloading",
 ]
 
 [[package]]
@@ -714,7 +614,7 @@ dependencies = [
 [[package]]
 name = "clap_utils"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "clap 2.34.0",
  "dirs",
@@ -767,12 +667,12 @@ dependencies = [
 [[package]]
 name = "compare_fields"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 
 [[package]]
 name = "compare_fields_derive"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "quote",
  "syn",
@@ -789,12 +689,6 @@ name = "const-oid"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e4c78c047431fee22c1a7bb92e00ad095a02a983affe4d8a72e2a2c62c1b94f3"
-
-[[package]]
-name = "convert_case"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6245d59a3e82a7fc217c5828a6692dbc6dfb63a0c8c90495621f7b9d79704a0e"
 
 [[package]]
 name = "core-foundation"
@@ -1047,7 +941,7 @@ checksum = "b72465f46d518f6015d9cf07f7f3013a95dd6b9c2747c3d65ae0cce43929d14f"
 [[package]]
 name = "deposit_contract"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_ssz",
  "ethabi 16.0.0",
@@ -1095,10 +989,8 @@ version = "0.99.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4fb810d30a7c1953f91334de7244731fc3f3c10d7fe163338a35b9f640960321"
 dependencies = [
- "convert_case",
  "proc-macro2",
  "quote",
- "rustc_version 0.4.0",
  "syn",
 ]
 
@@ -1125,7 +1017,7 @@ dependencies = [
 [[package]]
 name = "directory"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "clap 2.34.0",
  "clap_utils",
@@ -1343,7 +1235,7 @@ dependencies = [
 [[package]]
 name = "environment"
 version = "0.1.2"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "ctrlc",
  "eth2_config",
@@ -1374,7 +1266,7 @@ dependencies = [
 [[package]]
 name = "eth1"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2",
  "eth2_ssz",
@@ -1385,7 +1277,7 @@ dependencies = [
  "lazy_static",
  "lighthouse_metrics",
  "merkle_proof",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "reqwest",
  "sensitive_url",
  "serde",
@@ -1401,7 +1293,7 @@ dependencies = [
 [[package]]
 name = "eth2"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "account_utils",
  "bytes",
@@ -1430,7 +1322,7 @@ dependencies = [
 [[package]]
 name = "eth2_config"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "paste",
  "types",
@@ -1439,7 +1331,7 @@ dependencies = [
 [[package]]
 name = "eth2_hashing"
 version = "0.3.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "cpufeatures",
  "lazy_static",
@@ -1450,7 +1342,7 @@ dependencies = [
 [[package]]
 name = "eth2_interop_keypairs"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bls",
  "eth2_hashing",
@@ -1465,7 +1357,7 @@ dependencies = [
 [[package]]
 name = "eth2_key_derivation"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bls",
  "num-bigint-dig",
@@ -1477,7 +1369,7 @@ dependencies = [
 [[package]]
 name = "eth2_keystore"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "aes",
  "bls",
@@ -1499,7 +1391,7 @@ dependencies = [
 [[package]]
 name = "eth2_network_config"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "enr",
  "eth2_config",
@@ -1512,7 +1404,7 @@ dependencies = [
 [[package]]
 name = "eth2_serde_utils"
 version = "0.1.1"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "ethereum-types 0.12.1",
  "hex",
@@ -1524,7 +1416,7 @@ dependencies = [
 [[package]]
 name = "eth2_ssz"
 version = "0.4.1"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "ethereum-types 0.12.1",
  "smallvec",
@@ -1545,7 +1437,7 @@ dependencies = [
 [[package]]
 name = "eth2_ssz_types"
 version = "0.2.2"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "derivative",
  "eth2_serde_utils",
@@ -1560,7 +1452,7 @@ dependencies = [
 [[package]]
 name = "eth2_wallet"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_key_derivation",
  "eth2_keystore",
@@ -1633,7 +1525,7 @@ dependencies = [
 [[package]]
 name = "ethereum-consensus"
 version = "0.1.0"
-source = "git+https://github.com/ralexstokes/ethereum-consensus#8748ff49c98d409b6d6047a56fdaaa52df2fe541"
+source = "git+https://github.com/ralexstokes/ethereum-consensus#e4b364b22d61d4e42b3418b592bf8b73a5a92338"
 dependencies = [
  "async-stream",
  "blst",
@@ -1706,7 +1598,7 @@ dependencies = [
 [[package]]
 name = "execution_layer"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "async-trait",
  "builder_client",
@@ -1727,7 +1619,7 @@ dependencies = [
  "lighthouse_metrics",
  "lru",
  "mev-build-rs",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "rand 0.8.5",
  "reqwest",
  "sensitive_url",
@@ -1740,7 +1632,7 @@ dependencies = [
  "tempfile",
  "tokio",
  "tree_hash",
- "tree_hash_derive 0.4.0 (git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb)",
+ "tree_hash_derive 0.4.0 (git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201)",
  "types",
  "warp",
  "zeroize",
@@ -1768,7 +1660,7 @@ dependencies = [
 [[package]]
 name = "fallback"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "itertools",
 ]
@@ -1834,7 +1726,7 @@ dependencies = [
 [[package]]
 name = "filesystem"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "winapi",
  "windows-acl",
@@ -1860,13 +1752,11 @@ checksum = "279fb028e20b3c4c320317955b77c5e0c9701f05a1d309905d6fc702cdc5053e"
 
 [[package]]
 name = "flate2"
-version = "1.0.23"
+version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b39522e96686d38f4bc984b9198e3a0613264abaebaff2c5c918bfa6b6da09af"
+checksum = "f82b0f4c27ad9f8bfd1f3208d882da2b09c301bc1c828fd3a00d0216d2fbbff6"
 dependencies = [
- "cfg-if",
  "crc32fast",
- "libc",
  "libz-sys",
  "miniz_oxide",
 ]
@@ -1891,17 +1781,6 @@ name = "foreign-types-shared"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
-
-[[package]]
-name = "fork_choice"
-version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "eth2_ssz",
- "eth2_ssz_derive",
- "proto_array",
- "types",
-]
 
 [[package]]
 name = "form_urlencoded"
@@ -2053,26 +1932,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "genesis"
-version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "environment",
- "eth1",
- "eth2_hashing",
- "eth2_ssz",
- "futures",
- "int_to_bytes",
- "merkle_proof",
- "rayon",
- "slog",
- "state_processing",
- "tokio",
- "tree_hash",
- "types",
-]
-
-[[package]]
 name = "getrandom"
 version = "0.1.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2202,7 +2061,7 @@ dependencies = [
 [[package]]
 name = "hashset_delay"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "futures",
  "tokio-util 0.6.10",
@@ -2480,9 +2339,9 @@ checksum = "ce23b50ad8242c51a442f3ff322d56b02f08852c77e4c0b4d3fd684abc89c683"
 
 [[package]]
 name = "indexmap"
-version = "1.7.0"
+version = "1.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc633605454125dec4b66843673f01c7df2b89479b32e0ed634e43a91cff62a5"
+checksum = "e6012d540c5baa3589337a98ce73408de9b5a25ec9fc2c6fd6be8f0d39e0ca5a"
 dependencies = [
  "autocfg 1.1.0",
  "hashbrown",
@@ -2500,7 +2359,7 @@ dependencies = [
 [[package]]
 name = "int_to_bytes"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bytes",
 ]
@@ -2611,12 +2470,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "lazycell"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
-
-[[package]]
 name = "leveldb"
 version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2666,36 +2519,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "libloading"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "efbc0f03f9a775e9f6aed295c6a1ba2253c5757a9e03d55c6caa46a681abcddd"
-dependencies = [
- "cfg-if",
- "winapi",
-]
-
-[[package]]
 name = "libm"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "33a33a362ce288760ec6a508b94caaec573ae7d3bbbd91b87aa0bad4456839db"
-
-[[package]]
-name = "libmdbx"
-version = "0.1.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "897bbc93f0bc0152d809b89aa9b412ccb0c763881eac057ce891a5d497537f75"
-dependencies = [
- "bitflags",
- "byteorder",
- "derive_more",
- "indexmap",
- "libc",
- "mdbx-sys",
- "parking_lot 0.12.0",
- "thiserror",
-]
 
 [[package]]
 name = "libp2p"
@@ -2724,7 +2551,7 @@ dependencies = [
  "libp2p-websocket",
  "libp2p-yamux",
  "multiaddr 0.14.0",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "pin-project 1.0.10",
  "rand 0.7.3",
  "smallvec",
@@ -2786,7 +2613,7 @@ dependencies = [
  "multihash 0.16.2",
  "multistream-select 0.11.0",
  "p256",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "pin-project 1.0.10",
  "prost",
  "prost-build",
@@ -2885,7 +2712,7 @@ dependencies = [
  "libp2p-core 0.32.1",
  "log",
  "nohash-hasher",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "rand 0.7.3",
  "smallvec",
  "unsigned-varint 0.7.1",
@@ -2952,9 +2779,9 @@ dependencies = [
 
 [[package]]
 name = "libp2p-swarm-derive"
-version = "0.27.1"
+version = "0.27.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "daf2fe8c80b43561355f4d51875273b5b6dfbac37952e8f64b1270769305c9d7"
+checksum = "4f693c8c68213034d472cbb93a379c63f4f307d97c06f1c41e4985de481687a5"
 dependencies = [
  "quote",
  "syn",
@@ -3003,7 +2830,7 @@ checksum = "be902ebd89193cd020e89e89107726a38cfc0d16d18f613f4a37d046e92c7517"
 dependencies = [
  "futures",
  "libp2p-core 0.32.1",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "thiserror",
  "yamux",
 ]
@@ -3069,9 +2896,9 @@ dependencies = [
 
 [[package]]
 name = "libz-sys"
-version = "1.1.6"
+version = "1.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92e7e15d7610cce1d9752e137625f14e61a28cd45929b6e12e47b50fe154ee2e"
+checksum = "9702761c3935f8cc2f101793272e202c72b99da8f4224a19ddcf1279a6450bbf"
 dependencies = [
  "cc",
  "pkg-config",
@@ -3081,7 +2908,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_metrics"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "lazy_static",
  "prometheus",
@@ -3090,7 +2917,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_network"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "directory",
  "dirs",
@@ -3108,7 +2935,7 @@ dependencies = [
  "lighthouse_metrics",
  "lighthouse_version",
  "lru",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "prometheus-client",
  "rand 0.8.5",
  "regex",
@@ -3133,7 +2960,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_version"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "git-version",
  "target_info",
@@ -3158,7 +2985,7 @@ dependencies = [
 [[package]]
 name = "lockfile"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "fs2",
 ]
@@ -3175,7 +3002,7 @@ dependencies = [
 [[package]]
 name = "logging"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -3239,18 +3066,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73cbba799671b762df5a175adf59ce145165747bb891505c43d09aefbbf38beb"
 
 [[package]]
-name = "mdbx-sys"
-version = "0.11.7-6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6e191c9af757a54621bb4fddb6264ea5cc38cd340afa79cd531132216979867"
-dependencies = [
- "bindgen",
- "cc",
- "cmake",
- "libc",
-]
-
-[[package]]
 name = "memchr"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3268,7 +3083,7 @@ dependencies = [
 [[package]]
 name = "merkle_proof"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.12.1",
@@ -3308,16 +3123,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "minimal-lexical"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
-
-[[package]]
 name = "miniz_oxide"
-version = "0.5.1"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2b29bd4bc3f33391105ebee3589c19197c4271e3e5a9ec9bfe8127eeff8f082"
+checksum = "6f5c75688da582b8ffc1f1799e9db273f32133c49e048f614d22ec3256773ccc"
 dependencies = [
  "adler",
 ]
@@ -3343,12 +3152,10 @@ dependencies = [
  "eth2",
  "execution_layer",
  "exit-future",
- "futures",
  "futures-channel",
  "hex",
- "lru",
  "mev-build-rs",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "sensitive_url",
  "serde",
  "serde_derive",
@@ -3360,10 +3167,9 @@ dependencies = [
  "tracing",
  "tracing-core",
  "tracing-error",
+ "tracing-slog",
  "tracing-subscriber",
  "types",
- "warp",
- "warp_utils",
 ]
 
 [[package]]
@@ -3565,16 +3371,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf51a729ecf40266a2368ad335a5fdde43471f545a967109cd62146ecf8b66ff"
 
 [[package]]
-name = "nom"
-version = "7.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8903e5a29a317527874d0402f867152a3d21c908bb0b933e416c65e301d4c36"
-dependencies = [
- "memchr",
- "minimal-lexical",
-]
-
-[[package]]
 name = "num-bigint"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3730,26 +3526,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "operation_pool"
-version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "derivative",
- "eth2_ssz",
- "eth2_ssz_derive",
- "itertools",
- "lazy_static",
- "lighthouse_metrics",
- "parking_lot 0.12.0",
- "rayon",
- "serde",
- "serde_derive",
- "state_processing",
- "store",
- "types",
-]
-
-[[package]]
 name = "os_str_bytes"
 version = "6.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3847,9 +3623,9 @@ dependencies = [
 
 [[package]]
 name = "parking_lot"
-version = "0.12.0"
+version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87f5ec2493a61ac0506c0f4199f99070cbe83857b0337006a30f3e6719b8ef58"
+checksum = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
 dependencies = [
  "lock_api",
  "parking_lot_core 0.9.3",
@@ -3907,12 +3683,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "peeking_take_while"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "19b17cddbe7ec3f8bc800887bab5e717348c95ea2ca0b1bf0837fb964dc67099"
-
-[[package]]
 name = "pem"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3938,9 +3708,9 @@ dependencies = [
 
 [[package]]
 name = "petgraph"
-version = "0.6.1"
+version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51b305cc4569dd4e8765bab46261f67ef5d4d11a4b6e745100ee5dad8948b46c"
+checksum = "e6d5014253a1331579ce62aa67443b4a658c5e7dd03d4bc6d302b94474888143"
 dependencies = [
  "fixedbitset",
  "indexmap",
@@ -4149,7 +3919,7 @@ checksum = "6ab1427f3d2635891f842892dda177883dca0639e05fe66796a62c9d2f23b49c"
 dependencies = [
  "byteorder",
  "libc",
- "nom 2.2.1",
+ "nom",
  "rustc_version 0.2.3",
 ]
 
@@ -4163,7 +3933,7 @@ dependencies = [
  "fnv",
  "lazy_static",
  "memchr",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "protobuf",
  "thiserror",
 ]
@@ -4247,7 +4017,7 @@ dependencies = [
 [[package]]
 name = "proto_array"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_ssz",
  "eth2_ssz_derive",
@@ -4730,7 +4500,7 @@ checksum = "f3f6f92acf49d1b98f7a81226834412ada05458b7364277387724a237f062695"
 [[package]]
 name = "safe_arith"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 
 [[package]]
 name = "safemem"
@@ -4759,11 +4529,11 @@ dependencies = [
 
 [[package]]
 name = "scheduled-thread-pool"
-version = "0.2.5"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc6f74fd1204073fa02d5d5d68bec8021be4c38690b61264b2fdb48083d0e7d7"
+checksum = "977a7519bff143a44f842fd07e80ad1329295bd71686457f18e496736f4bf9bf"
 dependencies = [
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
 ]
 
 [[package]]
@@ -4888,7 +4658,7 @@ dependencies = [
 [[package]]
 name = "sensitive_url"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "serde",
  "url",
@@ -4910,16 +4680,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cd31f59f6fe2b0c055371bb2f16d7f0aa7d8881676c04a55b1596d1a17cd10a4"
 dependencies = [
  "serde",
-]
-
-[[package]]
-name = "serde_array_query"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d89c6e82b1005b33d5b2bbc47096800e5ad6b67ef5636f9c13ad29a6935734a7"
-dependencies = [
- "serde",
- "serde_urlencoded",
 ]
 
 [[package]]
@@ -4969,11 +4729,10 @@ dependencies = [
 
 [[package]]
 name = "serde_with"
-version = "1.13.0"
+version = "1.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b827f2113224f3f19a665136f006709194bdfdcb1fdc1e4b2b5cbac8e0cced54"
+checksum = "678b5a069e50bf00ecd22d0cd8ddf7c236f68581b03db652061ed5eb13a312ff"
 dependencies = [
- "rustversion",
  "serde",
  "serde_with_macros",
 ]
@@ -5082,12 +4841,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "shlex"
-version = "1.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43b2853a4d09f215c24cc5489c992ce46052d359b5109343cbafbf26bc62f8a3"
-
-[[package]]
 name = "signal-hook-registry"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5125,36 +4878,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eb703cfe953bccee95685111adeedb76fabe4e97549a58d16f03ea7b9367bb32"
 
 [[package]]
-name = "slasher"
-version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "bincode",
- "byteorder",
- "eth2_ssz",
- "eth2_ssz_derive",
- "filesystem",
- "flate2",
- "lazy_static",
- "libmdbx",
- "lighthouse_metrics",
- "lru",
- "parking_lot 0.12.0",
- "rand 0.8.5",
- "safe_arith",
- "serde",
- "serde_derive",
- "slog",
- "sloggers",
- "tree_hash",
- "tree_hash_derive 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "types",
-]
-
-[[package]]
 name = "slashing_protection"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_serde_utils",
  "filesystem",
@@ -5270,11 +4996,11 @@ dependencies = [
 [[package]]
 name = "slot_clock"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "types",
 ]
 
@@ -5361,7 +5087,7 @@ dependencies = [
 [[package]]
 name = "ssz-rs"
 version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs#70a99500b563188a8962e31ba1ce582a7fefa8f1"
+source = "git+https://github.com/ralexstokes/ssz-rs#22f11602fe4abb332fc5d9923b7477d87dec066b"
 dependencies = [
  "bitvec 1.0.0",
  "hex",
@@ -5376,7 +5102,7 @@ dependencies = [
 [[package]]
 name = "ssz-rs-derive"
 version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs#70a99500b563188a8962e31ba1ce582a7fefa8f1"
+source = "git+https://github.com/ralexstokes/ssz-rs#22f11602fe4abb332fc5d9923b7477d87dec066b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5392,7 +5118,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "state_processing"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bls",
  "eth2_hashing",
@@ -5420,7 +5146,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "store"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "db-key",
  "directory",
@@ -5431,7 +5157,7 @@ dependencies = [
  "leveldb",
  "lighthouse_metrics",
  "lru",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "serde",
  "serde_derive",
  "slog",
@@ -5498,7 +5224,7 @@ dependencies = [
 [[package]]
 name = "swap_or_not_shuffle"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.12.1",
@@ -5554,7 +5280,7 @@ checksum = "c63f48baada5c52e65a29eef93ab4f8982681b67f9e8d29c7b05abcfec2b9ffe"
 [[package]]
 name = "task_executor"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "exit-future",
  "futures",
@@ -5602,7 +5328,7 @@ dependencies = [
 [[package]]
 name = "test_random_derive"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "quote",
  "syn",
@@ -5745,7 +5471,7 @@ dependencies = [
  "mio",
  "num_cpus",
  "once_cell",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "pin-project-lite 0.2.9",
  "signal-hook-registry",
  "socket2",
@@ -5962,6 +5688,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "tracing-slog"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "943e2eb329c27f5731cc63f62a4ff4526439b2fdbe61c8c9816a82ba80139d5f"
+dependencies = [
+ "lazy_static",
+ "slog",
+ "tracing-core",
+]
+
+[[package]]
 name = "tracing-subscriber"
 version = "0.3.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6001,7 +5738,7 @@ dependencies = [
 [[package]]
 name = "tree_hash"
 version = "0.4.1"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.12.1",
@@ -6022,7 +5759,7 @@ dependencies = [
 [[package]]
 name = "tree_hash_derive"
 version = "0.4.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "darling",
  "quote",
@@ -6066,7 +5803,7 @@ dependencies = [
  "lazy_static",
  "log",
  "lru-cache",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "resolv-conf",
  "smallvec",
  "thiserror",
@@ -6117,7 +5854,7 @@ checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 [[package]]
 name = "types"
 version = "0.2.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bls",
  "cached_tree_hash",
@@ -6136,7 +5873,7 @@ dependencies = [
  "itertools",
  "lazy_static",
  "log",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "rand 0.8.5",
  "rand_xorshift",
  "rayon",
@@ -6269,7 +6006,7 @@ checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 [[package]]
 name = "unused_port"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 
 [[package]]
 name = "url"
@@ -6302,7 +6039,7 @@ dependencies = [
 [[package]]
 name = "validator_dir"
 version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
+source = "git+https://github.com/realbigsean/lighthouse?rev=7f5bd597bd468ffdcf8d57cada0dda08c866e201#7f5bd597bd468ffdcf8d57cada0dda08c866e201"
 dependencies = [
  "bls",
  "deposit_contract",
@@ -6385,25 +6122,6 @@ dependencies = [
  "tokio-util 0.6.10",
  "tower-service",
  "tracing",
-]
-
-[[package]]
-name = "warp_utils"
-version = "0.1.0"
-source = "git+https://github.com/realbigsean/lighthouse?rev=eefba72be582f663c4a46bb8f4eba106048dc2fb#eefba72be582f663c4a46bb8f4eba106048dc2fb"
-dependencies = [
- "beacon_chain",
- "eth2",
- "headers",
- "lazy_static",
- "lighthouse_metrics",
- "safe_arith",
- "serde",
- "serde_array_query",
- "state_processing",
- "tokio",
- "types",
- "warp",
 ]
 
 [[package]]
@@ -6715,7 +6433,7 @@ dependencies = [
  "futures",
  "log",
  "nohash-hasher",
- "parking_lot 0.12.0",
+ "parking_lot 0.12.1",
  "rand 0.8.5",
  "static_assertions",
 ]
