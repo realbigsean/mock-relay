@@ -99,12 +99,18 @@ async fn main() -> color_eyre::eyre::Result<()> {
     let beacon_client =
         eth2::BeaconNodeHttpClient::new(beacon_url, Timeouts::set_all(Duration::from_secs(12)));
 
-    let mock_builder = execution_layer::test_utils::MockBuilder::new(
-        el,
-        beacon_client,
-        ChainSpec::mainnet(),
-        MockBuilderContext::default(),
-    );
+    let config = beacon_client
+        .get_config_spec()
+        .await
+        .map_err(|e| eyre!(format!("{e:?}")))?
+        .data
+        .config;
+    let spec = ChainSpec::from_config::<MainnetEthSpec>(&config).unwrap();
+    let mut context = MockBuilderContext::default();
+    context.genesis_fork_version = spec.genesis_fork_version;
+
+    let mock_builder =
+        execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
 
     ApiServer::new(relay_config.address, relay_config.port, mock_builder)
         .run()
