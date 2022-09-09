@@ -1,7 +1,7 @@
 use clap::Parser;
 use color_eyre::eyre::eyre;
 use eth2::Timeouts;
-use execution_layer::test_utils::MockBuilderContext;
+use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
 use mev_build_rs::BlindedBlockProviderServer;
 use sensitive_url::SensitiveUrl;
@@ -50,6 +50,8 @@ struct MockRelay {
     log_level: Level,
     #[clap(long, short = 'n', help = "Ethereum network", possible_values = &["mainnet", "goerli", "sepolia"], default_value = "mainnet")]
     network: String,
+    #[clap(long, short = 'e', help = "Adding this flag", takes_value = false)]
+    empty_payloads: bool,
 }
 
 #[instrument]
@@ -108,9 +110,9 @@ async fn main() -> color_eyre::eyre::Result<()> {
     let spec = ChainSpec::from_config::<MainnetEthSpec>(config.data.config())
         .ok_or(eyre!("unable to parse chain spec from config"))?;
     let context = match relay_config.network.as_str() {
-        "mainnet" => MockBuilderContext::for_mainnet(),
-        "sepolia" => MockBuilderContext::for_sepolia(),
-        "goerli" => MockBuilderContext::for_goerli(),
+        "mainnet" => Context::for_mainnet(),
+        "sepolia" => Context::for_sepolia(),
+        "goerli" => Context::for_goerli(),
         _ => return Err(eyre!("invalid network")),
     };
 
