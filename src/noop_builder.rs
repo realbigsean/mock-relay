@@ -1,28 +1,22 @@
 use crate::{convert_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{
-    BlockId, ExecPayload, ExecutionPayload, ExecutionPayloadHeader, FullPayload, StateId,
-    ValidatorId,
-};
+use eth2::types::{ExecPayload, ExecutionPayload, ExecutionPayloadHeader, FullPayload};
 use eth2::BeaconNodeHttpClient;
-use ethereum_consensus::crypto::{SecretKey, Signature};
+use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
 use execution_layer::payload_cache::PayloadCache;
 use execution_layer::test_utils::get_params;
-use execution_layer::PayloadAttributes;
 use mev_build_rs::{
     sign_builder_message, verify_signed_builder_message, BidRequest, BlindedBlockProvider,
-    BlindedBlockProviderError, BlindedBlockProviderServer, BuilderBid,
-    ExecutionPayload as ServerPayload, ExecutionPayloadHeader as ServerPayloadHeader,
+    BlindedBlockProviderError, BuilderBid, ExecutionPayload as ServerPayload,
     SignedBlindedBeaconBlock, SignedBuilderBid, SignedValidatorRegistration,
 };
 use parking_lot::RwLock;
 use ssz_rs::Merkleized;
 use std::collections::HashMap;
-use std::fmt::Debug;
 use std::sync::Arc;
-use types::{BeaconState, BlindedPayload, ChainSpec, EthSpec, ExecutionBlockHash, Slot};
+use types::{ChainSpec, EthSpec, ExecutionBlockHash};
 
 #[derive(Clone)]
 pub struct NoOpBuilder<E: EthSpec> {
@@ -127,8 +121,18 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         &self,
         signed_block: &mut SignedBlindedBeaconBlock,
     ) -> Result<ServerPayload, BlindedBlockProviderError> {
-        let root = from_ssz_rs(&signed_block.message.body.execution_payload_header.hash_tree_root().map_err(convert_err)?)?;
-        let payload = self.payload_cache.pop(&root).ok_or(convert_err("payload cache miss"))?;
+        let root = from_ssz_rs(
+            &signed_block
+                .message
+                .body
+                .execution_payload_header
+                .hash_tree_root()
+                .map_err(convert_err)?,
+        )?;
+        let payload = self
+            .payload_cache
+            .pop(&root)
+            .ok_or(convert_err("payload cache miss"))?;
         to_ssz_rs(&payload)
     }
 }

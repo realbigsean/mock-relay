@@ -4,6 +4,7 @@ use eth2::Timeouts;
 use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
 use mev_build_rs::BlindedBlockProviderServer;
+use mock_relay::NoOpBuilder;
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
 use std::net::Ipv4Addr;
@@ -39,9 +40,9 @@ struct MockRelay {
     #[clap(
         long,
         help = "File path which contain the corresponding hex-encoded JWT secrets for the provided \
-            execution endpoint"
+            execution endpoint. Required unless used with `--empty-payloads`."
     )]
-    jwt_secret: PathBuf,
+    jwt_secret: Option<PathBuf>,
     #[clap(long, help = "Address to listen on", default_value = "127.0.0.1")]
     address: Ipv4Addr,
     #[clap(long, help = "Port to listen on", default_value_t = 8650)]
@@ -50,7 +51,12 @@ struct MockRelay {
     log_level: Level,
     #[clap(long, short = 'n', help = "Ethereum network", possible_values = &["mainnet", "goerli", "sepolia"], default_value = "mainnet")]
     network: String,
-    #[clap(long, short = 'e', help = "Adding this flag", takes_value = false)]
+    #[clap(
+        long,
+        short = 'e',
+        help = "Adding this flag will cause the payload to be populated with \
+        the minimal fields to be considered valid by the consensus layer, other fields will be defaulted."
+    )]
     empty_payloads: bool,
 }
 
@@ -68,35 +74,6 @@ async fn main() -> color_eyre::eyre::Result<()> {
         .init();
 
     tracing::info!("Starting mock relay");
-
-    let url = SensitiveUrl::parse(relay_config.execution_endpoint.as_str())
-        .map_err(|e| eyre!(format!("{e:?}")))?;
-
-    // Convert slog logs from the EL to tracing logs.
-    let drain = tracing_slog::TracingSlogDrain;
-    let log_root = Logger::root(drain, slog::o!());
-
-    let (shutdown_tx, _shutdown_rx) = futures_channel::mpsc::channel::<ShutdownReason>(1);
-    let (_signal, exit) = exit_future::signal();
-    let task_executor = task_executor::TaskExecutor::new(
-        tokio::runtime::Handle::current(),
-        exit,
-        log_root.clone(),
-        shutdown_tx,
-    );
-
-    let config = Config {
-        execution_endpoints: vec![url],
-        secret_files: vec![relay_config.jwt_secret],
-        ..Default::default()
-    };
-
-    let el = execution_layer::ExecutionLayer::<MainnetEthSpec>::from_config(
-        config,
-        task_executor,
-        log_root,
-    )
-    .map_err(|e| eyre!(format!("{e:?}")))?;
 
     let beacon_url = SensitiveUrl::parse(relay_config.beacon_node.as_str())
         .map_err(|e| eyre!(format!("{e:?}")))?;
@@ -116,15 +93,60 @@ async fn main() -> color_eyre::eyre::Result<()> {
         _ => return Err(eyre!("invalid network")),
     };
 
-    let mock_builder =
-        execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
+    if relay_config.empty_payloads {
+        let noop_builder: NoOpBuilder<MainnetEthSpec> =
+            NoOpBuilder::new(beacon_client, spec, context);
+        tracing::info!("Initialized no-op builder");
 
-    let pubkey = mock_builder.pubkey();
-    tracing::info!("Builder pubkey: {pubkey:#x}");
+        let pubkey = noop_builder.pubkey();
+        tracing::info!("Builder pubkey: {pubkey:#x}");
 
-    BlindedBlockProviderServer::new(relay_config.address, relay_config.port, mock_builder)
-        .run()
-        .await;
+        BlindedBlockProviderServer::new(relay_config.address, relay_config.port, noop_builder)
+            .run()
+            .await;
+    } else {
+        let url = SensitiveUrl::parse(relay_config.execution_endpoint.as_str())
+            .map_err(|e| eyre!(format!("{e:?}")))?;
+
+        // Convert slog logs from the EL to tracing logs.
+        let drain = tracing_slog::TracingSlogDrain;
+        let log_root = Logger::root(drain, slog::o!());
+
+        let (shutdown_tx, _shutdown_rx) = futures_channel::mpsc::channel::<ShutdownReason>(1);
+        let (_signal, exit) = exit_future::signal();
+        let task_executor = task_executor::TaskExecutor::new(
+            tokio::runtime::Handle::current(),
+            exit,
+            log_root.clone(),
+            shutdown_tx,
+        );
+
+        let config = Config {
+            execution_endpoints: vec![url],
+            secret_files: vec![relay_config
+                .jwt_secret
+                .ok_or(eyre!("jwt secret required"))?],
+            ..Default::default()
+        };
+
+        let el = execution_layer::ExecutionLayer::<MainnetEthSpec>::from_config(
+            config,
+            task_executor,
+            log_root,
+        )
+        .map_err(|e| eyre!(format!("{e:?}")))?;
+
+        let mock_builder =
+            execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
+        tracing::info!("Initialized mock builder");
+
+        let pubkey = mock_builder.pubkey();
+        tracing::info!("Builder pubkey: {pubkey:#x}");
+
+        BlindedBlockProviderServer::new(relay_config.address, relay_config.port, mock_builder)
+            .run()
+            .await;
+    };
 
     tracing::info!("Shutdown complete.");
 
