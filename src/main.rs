@@ -113,6 +113,9 @@ async fn main() -> color_eyre::eyre::Result<()> {
     let mock_builder =
         execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
 
+    let pubkey = mock_builder.pubkey();
+    tracing::info!("Builder pubkey: {pubkey:#x}");
+
     BlindedBlockProviderServer::new(relay_config.address, relay_config.port, mock_builder)
         .run()
         .await;
