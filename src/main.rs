@@ -107,8 +107,12 @@ async fn main() -> color_eyre::eyre::Result<()> {
         .map_err(|e| eyre!(format!("{e:?}")))?;
     let spec = ChainSpec::from_config::<MainnetEthSpec>(config.data.config())
         .ok_or(eyre!("unable to parse chain spec from config"))?;
-    let mut context = MockBuilderContext::default();
-    context.genesis_fork_version = spec.genesis_fork_version;
+    let context = match relay_config.network.as_str() {
+        "mainnet" => MockBuilderContext::for_mainnet(),
+        "sepolia" => MockBuilderContext::for_sepolia(),
+        "goerli" => MockBuilderContext::for_goerli(),
+        _ => return Err(eyre!("invalid network")),
+    };
 
     let mock_builder =
         execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
