@@ -3,7 +3,7 @@ use color_eyre::eyre::eyre;
 use eth2::Timeouts;
 use execution_layer::test_utils::MockBuilderContext;
 use execution_layer::Config;
-use mev_build_rs::ApiServer;
+use mev_build_rs::BlindedBlockProviderServer;
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
 use std::net::Ipv4Addr;
@@ -48,6 +48,8 @@ struct MockRelay {
     port: u16,
     #[clap(long, short = 'l', help = "Set the log level", default_value = "info")]
     log_level: Level,
+    #[clap(long, short = 'n', help = "Ethereum network", possible_values = &["mainnet", "goerli", "sepolia"], default_value = "mainnet")]
+    network: String,
 }
 
 #[instrument]
@@ -92,7 +94,7 @@ async fn main() -> color_eyre::eyre::Result<()> {
         task_executor,
         log_root,
     )
-    .unwrap();
+    .map_err(|e| eyre!(format!("{e:?}")))?;
 
     let beacon_url = SensitiveUrl::parse(relay_config.beacon_node.as_str())
         .map_err(|e| eyre!(format!("{e:?}")))?;
@@ -100,19 +102,18 @@ async fn main() -> color_eyre::eyre::Result<()> {
         eth2::BeaconNodeHttpClient::new(beacon_url, Timeouts::set_all(Duration::from_secs(12)));
 
     let config = beacon_client
-        .get_config_spec()
+        .get_config_spec::<types::ConfigAndPreset>()
         .await
-        .map_err(|e| eyre!(format!("{e:?}")))?
-        .data
-        .config;
-    let spec = ChainSpec::from_config::<MainnetEthSpec>(&config).unwrap();
+        .map_err(|e| eyre!(format!("{e:?}")))?;
+    let spec = ChainSpec::from_config::<MainnetEthSpec>(config.data.config())
+        .ok_or(eyre!("unable to parse chain spec from config"))?;
     let mut context = MockBuilderContext::default();
     context.genesis_fork_version = spec.genesis_fork_version;
 
     let mock_builder =
         execution_layer::test_utils::MockBuilder::new(el, beacon_client, spec, context);
 
-    ApiServer::new(relay_config.address, relay_config.port, mock_builder)
+    BlindedBlockProviderServer::new(relay_config.address, relay_config.port, mock_builder)
         .run()
         .await;
 
