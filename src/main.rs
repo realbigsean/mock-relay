@@ -4,7 +4,7 @@ use eth2::Timeouts;
 use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
 use mev_build_rs::BlindedBlockProviderServer;
-use mock_relay::NoOpBuilder;
+use mock_relay::{NoOpBuilder, NoOpConfig};
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
 use std::net::Ipv4Addr;
@@ -16,7 +16,7 @@ use tracing_core::LevelFilter;
 use tracing_error::ErrorLayer;
 use tracing_subscriber;
 use tracing_subscriber::prelude::*;
-use types::{ChainSpec, MainnetEthSpec};
+use types::{Address, ChainSpec, MainnetEthSpec};
 
 #[derive(Parser)]
 #[clap(
@@ -58,6 +58,12 @@ struct MockRelay {
         the minimal fields to be considered valid by the consensus layer, other fields will be defaulted."
     )]
     empty_payloads: bool,
+    #[clap(
+        long,
+        help = "Fee recipient to use in case of missing registration.",
+        requires("empty_payloads")
+    )]
+    default_fee_recipient: Option<Address>,
 }
 
 #[instrument]
@@ -94,8 +100,11 @@ async fn main() -> color_eyre::eyre::Result<()> {
     };
 
     if relay_config.empty_payloads {
+        let noop_config = NoOpConfig {
+            default_fee_recipient: relay_config.default_fee_recipient,
+        };
         let noop_builder: NoOpBuilder<MainnetEthSpec> =
-            NoOpBuilder::new(beacon_client, spec, context);
+            NoOpBuilder::new(beacon_client, spec, context, noop_config);
         tracing::info!("Initialized no-op builder");
 
         let pubkey = noop_builder.pubkey();
