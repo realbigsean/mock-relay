@@ -17,11 +17,11 @@ tracing-error = "0.2.0"
 tracing-core = "0.1.21"
 color-eyre = {version = "0.6.0", features = ["color-spantrace"]}
 serde_json = "1.0.79"
-execution_layer = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-types = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-task_executor = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-sensitive_url = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
+execution_layer = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+types = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+task_executor = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+sensitive_url = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+eth2 = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
 hex = "0.4.3"
@@ -34,10 +34,11 @@ ethereum-consensus = {git = "https://github.com/ralexstokes/ethereum-consensus",
 ssz-rs = {git = "https://github.com/ralexstokes/ssz-rs", rev = "cb08f1" }
 async-trait = "0.1.51"
 rand = "0.8.5"
+futures = "0.3.24"
 
 [patch.crates-io]
-eth2_serde_utils = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-eth2_ssz_types = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-tree_hash = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-eth2_ssz = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
-eth2_hashing = { git = "https://github.com/realbigsean/lighthouse", rev = "d35934df2c7cdcb692e6f1c09d9f387f5d9e8972" }
+eth2_serde_utils = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+eth2_ssz_types = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+tree_hash = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+eth2_ssz = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+eth2_hashing = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }

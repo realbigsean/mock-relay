@@ -1,15 +1,17 @@
 use crate::{convert_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{ExecPayload, ExecutionPayload, ExecutionPayloadHeader, FullPayload};
+use eth2::types::{
+    BlockId, ExecPayload, ExecutionPayload, ExecutionPayloadHeader, FullPayload, StateId,
+};
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
 use execution_layer::payload_cache::PayloadCache;
-use execution_layer::test_utils::get_params;
+use futures::future;
 use mev_build_rs::{
     sign_builder_message, verify_signed_builder_message, BidRequest, BlindedBlockProvider,
-    BlindedBlockProviderError, BuilderBid, ExecutionPayload as ServerPayload,
+    BlindedBlockProviderError as Error, BuilderBid, ExecutionPayload as ServerPayload,
     SignedBlindedBeaconBlock, SignedBuilderBid, SignedValidatorRegistration,
 };
 use parking_lot::RwLock;
@@ -65,7 +67,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
     async fn register_validators(
         &self,
         registrations: &mut [SignedValidatorRegistration],
-    ) -> Result<(), BlindedBlockProviderError> {
+    ) -> Result<(), Error> {
         for registration in registrations {
             let pubkey = registration.message.public_key.clone();
             let message = &mut registration.message;
@@ -84,10 +86,8 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         Ok(())
     }
 
-    async fn fetch_best_bid(
-        &self,
-        bid_request: &BidRequest,
-    ) -> Result<SignedBuilderBid, BlindedBlockProviderError> {
+    async fn fetch_best_bid(&self, bid_request: &BidRequest) -> Result<SignedBuilderBid, Error> {
+        let slot = bid_request.slot;
         let (fee_recipient, gas_limit) = self
             .val_registration_cache
             .read()
@@ -98,7 +98,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         .default_fee_recipient
                         .map(|fee_recipient| (fee_recipient, DEFAULT_GAS_LIMIT))
                         .ok_or_else(|| {
-                            BlindedBlockProviderError::Custom(format!(
+                            Error::Custom(format!(
                                 "missing registration and no default fee recipient set"
                             ))
                         })
@@ -110,22 +110,69 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 },
             )?;
 
-        // FIXME(sproul): this takes 2s+ on Goerli
-        //
-        // really we just need:
-        // - prev_randao (from head state)
-        // - block_number (parent block + 1)
-        tracing::info!("requesting parameters from BN");
-        let (payload_attributes, _, block_number) =
-            get_params::<E>(&self.beacon_client, bid_request, fee_recipient, &self.spec).await?;
-        tracing::info!("obtained parameters from BN");
+        // This is a bit racey because we might fetch the RANDAO from a different parent block,
+        // however it is fast. With more states cached in memory we could use the state root
+        // of the parent block for the RANDAO lookup, but right now with Lighthouse at least
+        // this is too slow.
+        tracing::info!("slot {slot}: requesting parameters from BN");
+
+        let (prev_randao_res, parent_block_res) = future::join(
+            async {
+                self.beacon_client
+                    .get_beacon_states_randao(StateId::Head, None)
+                    .await
+                    .map(|res| res.data.randao)
+                    .map_err(|e| {
+                        Error::Custom(format!("unable to fetch prev_randao from BN: {e:?}"))
+                    })
+            },
+            async {
+                self.beacon_client
+                    .get_beacon_blinded_blocks_ssz::<E>(BlockId::Head, &self.spec)
+                    .await
+                    .map_err(|e| {
+                        Error::Custom(format!("unable to get previous block from BN: {e:?}"))
+                    })?
+                    .ok_or_else(|| Error::Custom(format!("head block missing from BN")))
+            },
+        )
+        .await;
+        let prev_randao = prev_randao_res?;
+        let parent_block = parent_block_res?;
+        tracing::info!("slot {slot}: obtained parameters from BN");
+
+        let parent_hash = from_ssz_rs(&bid_request.parent_hash)?;
+        let parent_payload_header = parent_block.message().body().execution_payload().unwrap();
+
+        if parent_payload_header.block_hash() != parent_hash {
+            return Err(Error::Custom(format!(
+                "parent hash mismatch, BN: {:?} vs request: {:?}",
+                parent_payload_header.block_hash(),
+                parent_hash
+            )));
+        }
+
+        if parent_block.slot() >= slot {
+            return Err(Error::Custom(format!(
+                "incompatible parent slot, BN: {} vs request: {}",
+                parent_block.slot(),
+                slot
+            )));
+        }
+
+        // Increment block number.
+        let block_number = parent_payload_header.block_number() + 1;
+
+        // Use the parent payload's timestamp to compute the new timestamp.
+        let timestamp = parent_payload_header.timestamp()
+            + (slot - parent_block.slot().as_u64()) * self.context.seconds_per_slot;
 
         let payload = FullPayload {
             execution_payload: ExecutionPayload {
-                parent_hash: from_ssz_rs(&bid_request.parent_hash)?,
-                timestamp: payload_attributes.timestamp,
-                fee_recipient: fee_recipient,
-                prev_randao: payload_attributes.prev_randao,
+                parent_hash,
+                timestamp,
+                fee_recipient,
+                prev_randao,
                 block_number,
                 gas_limit,
                 ..Default::default()
@@ -152,7 +199,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
     async fn open_bid(
         &self,
         signed_block: &mut SignedBlindedBeaconBlock,
-    ) -> Result<ServerPayload, BlindedBlockProviderError> {
+    ) -> Result<ServerPayload, Error> {
         let root = from_ssz_rs(
             &signed_block
                 .message
