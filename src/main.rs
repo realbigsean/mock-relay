@@ -117,6 +117,7 @@ async fn main() -> color_eyre::eyre::Result<()> {
         context.genesis_fork_version = bytes;
         spec.genesis_fork_version = bytes;
     };
+    tracing::info!("Genesis fork version: 0x{}", hex::encode(context.genesis_fork_version));
 
     if relay_config.empty_payloads {
         let noop_config = NoOpConfig {

@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "account_utils"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "directory",
  "eth2_keystore",
@@ -382,7 +382,7 @@ checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
 [[package]]
 name = "bls"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "blst",
  "eth2_hashing",
@@ -429,7 +429,7 @@ dependencies = [
 [[package]]
 name = "builder_client"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2",
  "reqwest",
@@ -489,7 +489,7 @@ dependencies = [
 [[package]]
 name = "cached_tree_hash"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_hashing",
  "eth2_ssz",
@@ -618,7 +618,7 @@ dependencies = [
 [[package]]
 name = "clap_utils"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "clap 2.34.0",
  "dirs",
@@ -671,12 +671,12 @@ dependencies = [
 [[package]]
 name = "compare_fields"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 
 [[package]]
 name = "compare_fields_derive"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "quote",
  "syn",
@@ -955,7 +955,7 @@ dependencies = [
 [[package]]
 name = "deposit_contract"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_ssz",
  "ethabi 16.0.0",
@@ -1031,7 +1031,7 @@ dependencies = [
 [[package]]
 name = "directory"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "clap 2.34.0",
  "clap_utils",
@@ -1249,7 +1249,7 @@ dependencies = [
 [[package]]
 name = "environment"
 version = "0.1.2"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "ctrlc",
  "eth2_config",
@@ -1280,7 +1280,7 @@ dependencies = [
 [[package]]
 name = "eth2"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "account_utils",
  "bytes",
@@ -1309,7 +1309,7 @@ dependencies = [
 [[package]]
 name = "eth2_config"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "paste",
  "types",
@@ -1329,7 +1329,7 @@ dependencies = [
 [[package]]
 name = "eth2_interop_keypairs"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bls",
  "eth2_hashing",
@@ -1344,7 +1344,7 @@ dependencies = [
 [[package]]
 name = "eth2_key_derivation"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bls",
  "num-bigint-dig",
@@ -1356,7 +1356,7 @@ dependencies = [
 [[package]]
 name = "eth2_keystore"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "aes",
  "bls",
@@ -1378,7 +1378,7 @@ dependencies = [
 [[package]]
 name = "eth2_network_config"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "enr",
  "eth2_config",
@@ -1440,7 +1440,7 @@ dependencies = [
 [[package]]
 name = "eth2_wallet"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_key_derivation",
  "eth2_keystore",
@@ -1583,7 +1583,7 @@ dependencies = [
 [[package]]
 name = "execution_layer"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "async-trait",
  "builder_client",
@@ -1620,7 +1620,7 @@ dependencies = [
  "tokio",
  "tokio-stream",
  "tree_hash",
- "tree_hash_derive 0.4.0 (git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede)",
+ "tree_hash_derive 0.4.0 (git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4)",
  "types",
  "warp",
  "zeroize",
@@ -1706,7 +1706,7 @@ dependencies = [
 [[package]]
 name = "filesystem"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "winapi",
  "windows-acl",
@@ -1765,7 +1765,7 @@ checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 [[package]]
 name = "fork_choice"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_ssz",
  "eth2_ssz_derive",
@@ -2375,7 +2375,7 @@ dependencies = [
 [[package]]
 name = "int_to_bytes"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bytes",
 ]
@@ -2927,7 +2927,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_metrics"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "lazy_static",
  "prometheus",
@@ -2936,7 +2936,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_network"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "delay_map",
  "directory",
@@ -2979,7 +2979,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_version"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "git-version",
  "target_info",
@@ -3004,7 +3004,7 @@ dependencies = [
 [[package]]
 name = "lockfile"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "fs2",
 ]
@@ -3021,7 +3021,7 @@ dependencies = [
 [[package]]
 name = "logging"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -3108,7 +3108,7 @@ dependencies = [
 [[package]]
 name = "merkle_proof"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.12.1",
@@ -4105,7 +4105,7 @@ dependencies = [
 [[package]]
 name = "proto_array"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_ssz",
  "eth2_ssz_derive",
@@ -4591,7 +4591,7 @@ checksum = "4501abdff3ae82a1c1b477a17252eb69cee9e66eb915c1abaa4f44d873df9f09"
 [[package]]
 name = "safe_arith"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 
 [[package]]
 name = "safemem"
@@ -4749,7 +4749,7 @@ dependencies = [
 [[package]]
 name = "sensitive_url"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "serde",
  "url",
@@ -4965,7 +4965,7 @@ dependencies = [
 [[package]]
 name = "slashing_protection"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_serde_utils",
  "filesystem",
@@ -5081,7 +5081,7 @@ dependencies = [
 [[package]]
 name = "slot_clock"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -5203,7 +5203,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "state_processing"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bls",
  "derivative",
@@ -5233,7 +5233,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "store"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "db-key",
  "directory",
@@ -5311,7 +5311,7 @@ dependencies = [
 [[package]]
 name = "swap_or_not_shuffle"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.12.1",
@@ -5367,7 +5367,7 @@ checksum = "c63f48baada5c52e65a29eef93ab4f8982681b67f9e8d29c7b05abcfec2b9ffe"
 [[package]]
 name = "task_executor"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "exit-future",
  "futures",
@@ -5415,7 +5415,7 @@ dependencies = [
 [[package]]
 name = "test_random_derive"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "quote",
  "syn",
@@ -5847,7 +5847,7 @@ dependencies = [
 [[package]]
 name = "tree_hash_derive"
 version = "0.4.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "darling",
  "quote",
@@ -5942,7 +5942,7 @@ checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 [[package]]
 name = "types"
 version = "0.2.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bls",
  "cached_tree_hash",
@@ -6095,7 +6095,7 @@ checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 [[package]]
 name = "unused_port"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 
 [[package]]
 name = "url"
@@ -6127,7 +6127,7 @@ dependencies = [
 [[package]]
 name = "validator_dir"
 version = "0.1.0"
-source = "git+https://github.com/michaelsproul/lighthouse?rev=1ace774dc8105425c14050863ab73267cfc39ede#1ace774dc8105425c14050863ab73267cfc39ede"
+source = "git+https://github.com/ethdreamer/lighthouse?rev=818a1b988cf3130bbca84518ba8ae1280b5f3dc4#818a1b988cf3130bbca84518ba8ae1280b5f3dc4"
 dependencies = [
  "bls",
  "deposit_contract",
