@@ -64,6 +64,14 @@ struct MockRelay {
         requires("empty_payloads")
     )]
     default_fee_recipient: Option<Address>,
+    #[clap(
+        long,
+        help = "0x-prefixed hex encoded bytes representing the `GENESIS_FORK_VERSION` field defined \
+            in the consensus specs. Defaults to the correct value based on the provided network flag. \
+            In order for valid signatures to be produced on non-default networks (e.g., shadowforks) \
+            this flag must be used."
+    )]
+    genesis_fork_version: Option<String>,
 }
 
 #[instrument]
@@ -90,13 +98,24 @@ async fn main() -> color_eyre::eyre::Result<()> {
         .get_config_spec::<types::ConfigAndPreset>()
         .await
         .map_err(|e| eyre!(format!("{e:?}")))?;
-    let spec = ChainSpec::from_config::<MainnetEthSpec>(config.data.config())
+    let mut spec = ChainSpec::from_config::<MainnetEthSpec>(config.data.config())
         .ok_or(eyre!("unable to parse chain spec from config"))?;
-    let context = match relay_config.network.as_str() {
+    let mut context = match relay_config.network.as_str() {
         "mainnet" => Context::for_mainnet(),
         "sepolia" => Context::for_sepolia(),
         "goerli" => Context::for_goerli(),
         _ => return Err(eyre!("invalid network")),
+    };
+
+    if let Some(genesis_fork_version) = relay_config.genesis_fork_version {
+        let stripped = genesis_fork_version
+            .strip_prefix("0x")
+            .ok_or(eyre!("genesis fork version must be 0x-prefixed"))?;
+        let bytes: [u8; 4] = hex::decode(stripped)?
+            .try_into()
+            .map_err(|_| eyre!("genesis fork version must be four bytes in length"))?;
+        context.genesis_fork_version = bytes;
+        spec.genesis_fork_version = bytes;
     };
 
     if relay_config.empty_payloads {
