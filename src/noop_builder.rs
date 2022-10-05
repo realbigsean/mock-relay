@@ -185,7 +185,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
 
         let mut message = BuilderBid {
             header: to_ssz_rs(&header)?,
-            value: ssz_rs::U256::default(),
+            value: ssz_rs::U256::from(1u64),
             public_key: self.builder_sk.public_key(),
         };
 
