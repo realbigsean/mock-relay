@@ -18,7 +18,7 @@ use parking_lot::RwLock;
 use ssz_rs::Merkleized;
 use std::collections::HashMap;
 use std::sync::Arc;
-use types::{Address, ChainSpec, EthSpec};
+use types::{Address, ChainSpec, EthSpec, VariableList};
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
 
@@ -175,6 +175,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 prev_randao,
                 block_number,
                 gas_limit,
+                transactions: VariableList::new(vec![VariableList::new(vec![0]).unwrap()]).unwrap(),
                 ..Default::default()
             },
         };
