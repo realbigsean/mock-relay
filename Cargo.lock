@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "account_utils"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "directory",
  "eth2_keystore",
@@ -181,9 +181,8 @@ checksum = "224afbd727c3d6e4b90103ece64b8d1b67fbb1973b1046c2281eed3f3803f800"
 
 [[package]]
 name = "arbitrary"
-version = "1.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3e90af4de65aa7b293ef2d09daff88501eb254f58edde2e1ac02c82d873eadad"
+version = "1.2.2"
+source = "git+https://github.com/michaelsproul/arbitrary?rev=a572fd8743012a4f1ada5ee5968b1b3619c427ba#a572fd8743012a4f1ada5ee5968b1b3619c427ba"
 dependencies = [
  "derive_arbitrary",
 ]
@@ -495,7 +494,7 @@ name = "beacon-api-client"
 version = "0.1.0"
 source = "git+https://github.com/ralexstokes/beacon-api-client#53690a711e33614d59d4d44fb09762b4699e2a4e"
 dependencies = [
- "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes/ethereum-consensus?rev=5531c285fc4030e265b8499612946d8a704e2c57)",
+ "ethereum-consensus",
  "http",
  "itertools",
  "reqwest",
@@ -594,7 +593,7 @@ checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
 [[package]]
 name = "bls"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "arbitrary",
  "blst",
@@ -642,7 +641,7 @@ dependencies = [
 [[package]]
 name = "builder_client"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2",
  "reqwest",
@@ -702,7 +701,7 @@ dependencies = [
 [[package]]
 name = "cached_tree_hash"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_hashing",
  "eth2_ssz",
@@ -851,7 +850,7 @@ dependencies = [
 [[package]]
 name = "clap_utils"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "clap 2.34.0",
  "dirs",
@@ -914,12 +913,12 @@ dependencies = [
 [[package]]
 name = "compare_fields"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 
 [[package]]
 name = "compare_fields_derive"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "quote",
  "syn",
@@ -1339,7 +1338,7 @@ dependencies = [
 [[package]]
 name = "deposit_contract"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_ssz",
  "ethabi 16.0.0",
@@ -1403,10 +1402,10 @@ dependencies = [
 
 [[package]]
 name = "derive_arbitrary"
-version = "1.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8beee4701e2e229e8098bbdecdca12449bc3e322f137d269182fa1291e20bd00"
+version = "1.2.2"
+source = "git+https://github.com/michaelsproul/arbitrary?rev=a572fd8743012a4f1ada5ee5968b1b3619c427ba#a572fd8743012a4f1ada5ee5968b1b3619c427ba"
 dependencies = [
+ "darling 0.14.3",
  "proc-macro2",
  "quote",
  "syn",
@@ -1477,7 +1476,7 @@ dependencies = [
 [[package]]
 name = "directory"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "clap 2.34.0",
  "clap_utils",
@@ -1683,7 +1682,7 @@ dependencies = [
 [[package]]
 name = "environment"
 version = "0.1.2"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "ctrlc",
  "eth2_config",
@@ -1716,7 +1715,7 @@ dependencies = [
 [[package]]
 name = "eth2"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "account_utils",
  "bytes",
@@ -1745,7 +1744,7 @@ dependencies = [
 [[package]]
 name = "eth2_config"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "paste",
  "types",
@@ -1754,7 +1753,7 @@ dependencies = [
 [[package]]
 name = "eth2_hashing"
 version = "0.3.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "cpufeatures",
  "lazy_static",
@@ -1765,7 +1764,7 @@ dependencies = [
 [[package]]
 name = "eth2_interop_keypairs"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "bls",
  "eth2_hashing",
@@ -1780,7 +1779,7 @@ dependencies = [
 [[package]]
 name = "eth2_key_derivation"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "bls",
  "num-bigint-dig",
@@ -1792,7 +1791,7 @@ dependencies = [
 [[package]]
 name = "eth2_keystore"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "aes 0.7.5",
  "bls",
@@ -1814,7 +1813,7 @@ dependencies = [
 [[package]]
 name = "eth2_network_config"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "enr",
  "eth2_config",
@@ -1827,7 +1826,7 @@ dependencies = [
 [[package]]
 name = "eth2_serde_utils"
 version = "0.1.1"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "ethereum-types 0.14.1",
  "hex",
@@ -1839,7 +1838,7 @@ dependencies = [
 [[package]]
 name = "eth2_ssz"
 version = "0.4.1"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "ethereum-types 0.14.1",
  "itertools",
@@ -1849,7 +1848,7 @@ dependencies = [
 [[package]]
 name = "eth2_ssz_derive"
 version = "0.3.1"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "darling 0.13.4",
  "proc-macro2",
@@ -1860,7 +1859,7 @@ dependencies = [
 [[package]]
 name = "eth2_ssz_types"
 version = "0.2.2"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "arbitrary",
  "derivative",
@@ -1876,7 +1875,7 @@ dependencies = [
 [[package]]
 name = "eth2_wallet"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_key_derivation",
  "eth2_keystore",
@@ -1951,7 +1950,7 @@ dependencies = [
 [[package]]
 name = "ethereum-consensus"
 version = "0.1.1"
-source = "git+https://github.com/ralexstokes/ethereum-consensus?rev=5531c285fc4030e265b8499612946d8a704e2c57#5531c285fc4030e265b8499612946d8a704e2c57"
+source = "git+https://github.com/ralexstokes//ethereum-consensus?rev=9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d#9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d"
 dependencies = [
  "async-stream",
  "blst",
@@ -1965,54 +1964,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2 0.9.9",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=5946af4a65a1e8547a8fc7cfb62e12637421b8f2)",
- "thiserror",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "ethereum-consensus"
-version = "0.1.1"
-source = "git+https://github.com/ralexstokes/ethereum-consensus?rev=9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d#9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d"
-dependencies = [
- "async-stream",
- "blst",
- "bs58",
- "enr",
- "hex",
- "integer-sqrt",
- "multiaddr 0.14.0",
- "multihash",
- "rand 0.8.5",
- "serde",
- "serde_json",
- "sha2 0.9.9",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1)",
- "thiserror",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "ethereum-consensus"
-version = "0.1.1"
-source = "git+https://github.com/ralexstokes/ethereum-consensus#de14cb1399ae694275a65fb94702e859c9e15430"
-dependencies = [
- "async-stream",
- "blst",
- "bs58",
- "enr",
- "hex",
- "integer-sqrt",
- "multiaddr 0.14.0",
- "multihash",
- "rand 0.8.5",
- "serde",
- "serde_json",
- "serde_yaml",
- "sha2 0.9.9",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1)",
+ "ssz-rs",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -2083,7 +2035,7 @@ checksum = "0206175f82b8d6bf6652ff7d71a1e27fd2e4efde587fd368662814d6ec1d9ce0"
 [[package]]
 name = "execution_layer"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "async-trait",
  "builder_client",
@@ -2093,7 +2045,7 @@ dependencies = [
  "eth2_serde_utils",
  "eth2_ssz",
  "eth2_ssz_types",
- "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes/ethereum-consensus)",
+ "ethereum-consensus",
  "ethers-core",
  "exit-future",
  "fork_choice",
@@ -2106,7 +2058,7 @@ dependencies = [
  "lazy_static",
  "lighthouse_metrics",
  "lru 0.7.8",
- "mev-rs 0.2.1 (git+https://github.com/ralexstokes/mev-rs)",
+ "mev-rs",
  "parking_lot 0.12.1",
  "rand 0.8.5",
  "reqwest",
@@ -2115,7 +2067,7 @@ dependencies = [
  "serde_json",
  "slog",
  "slot_clock",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs)",
+ "ssz-rs",
  "state_processing",
  "strum",
  "superstruct 0.6.0",
@@ -2124,7 +2076,7 @@ dependencies = [
  "tokio",
  "tokio-stream",
  "tree_hash",
- "tree_hash_derive 0.4.0 (git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e)",
+ "tree_hash_derive",
  "triehash",
  "types",
  "warp",
@@ -2206,7 +2158,7 @@ dependencies = [
 [[package]]
 name = "filesystem"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "winapi",
  "windows-acl",
@@ -2278,7 +2230,7 @@ checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 [[package]]
 name = "fork_choice"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_ssz",
  "eth2_ssz_derive",
@@ -2973,7 +2925,7 @@ dependencies = [
 [[package]]
 name = "int_to_bytes"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "bytes",
 ]
@@ -3648,7 +3600,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_metrics"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "lazy_static",
  "prometheus",
@@ -3657,7 +3609,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_network"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "delay_map",
  "directory",
@@ -3693,7 +3645,7 @@ dependencies = [
  "tokio-io-timeout",
  "tokio-util 0.6.10",
  "tree_hash",
- "tree_hash_derive 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tree_hash_derive",
  "types",
  "unsigned-varint 0.6.0",
  "unused_port",
@@ -3703,7 +3655,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_version"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "git-version",
  "target_info",
@@ -3737,7 +3689,7 @@ dependencies = [
 [[package]]
 name = "lockfile"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "fs2",
 ]
@@ -3754,7 +3706,7 @@ dependencies = [
 [[package]]
 name = "logging"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -3868,7 +3820,7 @@ dependencies = [
 [[package]]
 name = "merkle_proof"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.14.1",
@@ -3902,32 +3854,15 @@ dependencies = [
 [[package]]
 name = "mev-rs"
 version = "0.2.1"
-source = "git+https://github.com/ralexstokes/mev-rs?rev=7813d4a4a564e0754e9aaab2d95520ba437c3889#7813d4a4a564e0754e9aaab2d95520ba437c3889"
+source = "git+https://github.com/ralexstokes//mev-rs?rev=7813d4a4a564e0754e9aaab2d95520ba437c3889#7813d4a4a564e0754e9aaab2d95520ba437c3889"
 dependencies = [
  "async-trait",
  "axum",
  "beacon-api-client",
- "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes/ethereum-consensus)",
+ "ethereum-consensus",
  "hyper",
  "serde",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs)",
- "thiserror",
- "tokio",
- "tracing",
-]
-
-[[package]]
-name = "mev-rs"
-version = "0.2.1"
-source = "git+https://github.com/ralexstokes/mev-rs#7813d4a4a564e0754e9aaab2d95520ba437c3889"
-dependencies = [
- "async-trait",
- "axum",
- "beacon-api-client",
- "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes/ethereum-consensus)",
- "hyper",
- "serde",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs)",
+ "ssz-rs",
  "thiserror",
  "tokio",
  "tracing",
@@ -3980,18 +3915,20 @@ dependencies = [
 name = "mock-relay"
 version = "0.1.0"
 dependencies = [
+ "arbitrary",
  "async-trait",
  "clap 3.2.23",
  "color-eyre",
  "eth2",
  "eth2_ssz_derive",
- "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes/ethereum-consensus?rev=9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d)",
+ "ethereum-consensus",
  "execution_layer",
  "exit-future",
  "futures",
  "futures-channel",
  "hex",
- "mev-rs 0.2.1 (git+https://github.com/ralexstokes/mev-rs?rev=7813d4a4a564e0754e9aaab2d95520ba437c3889)",
+ "lru 0.7.8",
+ "mev-rs",
  "parking_lot 0.12.1",
  "rand 0.8.5",
  "sensitive_url",
@@ -4000,7 +3937,7 @@ dependencies = [
  "serde_json",
  "slog",
  "sloggers",
- "ssz-rs 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1)",
+ "ssz-rs",
  "task_executor",
  "tokio",
  "tracing",
@@ -5045,7 +4982,7 @@ dependencies = [
 [[package]]
 name = "proto_array"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_ssz",
  "eth2_ssz_derive",
@@ -5621,7 +5558,7 @@ checksum = "7b4b9743ed687d4b4bcedf9ff5eaa7398495ae14e61cba0a295704edbc7decde"
 [[package]]
 name = "safe_arith"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 
 [[package]]
 name = "safemem"
@@ -5821,7 +5758,7 @@ dependencies = [
 [[package]]
 name = "sensitive_url"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "serde",
  "url",
@@ -6057,7 +5994,7 @@ dependencies = [
 [[package]]
 name = "slashing_protection"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_serde_utils",
  "filesystem",
@@ -6173,7 +6110,7 @@ dependencies = [
 [[package]]
 name = "slot_clock"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -6255,69 +6192,21 @@ dependencies = [
 [[package]]
 name = "ssz-rs"
 version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs?rev=5946af4a65a1e8547a8fc7cfb62e12637421b8f2#5946af4a65a1e8547a8fc7cfb62e12637421b8f2"
+source = "git+https://github.com/ralexstokes//ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1#adf1a0b14cef90b9536f28ef89da1fab316465e1"
 dependencies = [
  "bitvec 1.0.1",
  "hex",
  "num-bigint",
  "serde",
  "sha2 0.9.9",
- "ssz-rs-derive 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=5946af4a65a1e8547a8fc7cfb62e12637421b8f2)",
- "thiserror",
-]
-
-[[package]]
-name = "ssz-rs"
-version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1#adf1a0b14cef90b9536f28ef89da1fab316465e1"
-dependencies = [
- "bitvec 1.0.1",
- "hex",
- "num-bigint",
- "serde",
- "sha2 0.9.9",
- "ssz-rs-derive 0.8.0 (git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1)",
- "thiserror",
-]
-
-[[package]]
-name = "ssz-rs"
-version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs#45ff6f19ad155657de6bbd32257257154adfcd9f"
-dependencies = [
- "bitvec 1.0.1",
- "hex",
- "num-bigint",
- "serde",
- "sha2 0.9.9",
- "ssz-rs-derive 0.8.0 (git+https://github.com/ralexstokes/ssz-rs)",
+ "ssz-rs-derive",
  "thiserror",
 ]
 
 [[package]]
 name = "ssz-rs-derive"
 version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs?rev=5946af4a65a1e8547a8fc7cfb62e12637421b8f2#5946af4a65a1e8547a8fc7cfb62e12637421b8f2"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "ssz-rs-derive"
-version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1#adf1a0b14cef90b9536f28ef89da1fab316465e1"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "ssz-rs-derive"
-version = "0.8.0"
-source = "git+https://github.com/ralexstokes/ssz-rs#45ff6f19ad155657de6bbd32257257154adfcd9f"
+source = "git+https://github.com/ralexstokes//ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1#adf1a0b14cef90b9536f28ef89da1fab316465e1"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6327,7 +6216,7 @@ dependencies = [
 [[package]]
 name = "state_processing"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "bls",
  "derivative",
@@ -6357,7 +6246,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "store"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "db-key",
  "directory",
@@ -6477,7 +6366,7 @@ dependencies = [
 [[package]]
 name = "swap_or_not_shuffle"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.14.1",
@@ -6554,7 +6443,7 @@ checksum = "c63f48baada5c52e65a29eef93ab4f8982681b67f9e8d29c7b05abcfec2b9ffe"
 [[package]]
 name = "task_executor"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "exit-future",
  "futures",
@@ -6602,7 +6491,7 @@ dependencies = [
 [[package]]
 name = "test_random_derive"
 version = "0.2.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "quote",
  "syn",
@@ -7033,7 +6922,7 @@ dependencies = [
 [[package]]
 name = "tree_hash"
 version = "0.4.1"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "eth2_hashing",
  "ethereum-types 0.14.1",
@@ -7043,18 +6932,7 @@ dependencies = [
 [[package]]
 name = "tree_hash_derive"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3cd22d128157837a4434bb51119aef11103f17bfe8c402ce688cf25aa1e608ad"
-dependencies = [
- "darling 0.13.4",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "tree_hash_derive"
-version = "0.4.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "darling 0.13.4",
  "quote",
@@ -7179,7 +7057,7 @@ checksum = "497961ef93d974e23eb6f433eb5fe1b7930b659f06d12dec6fc44a8f554c0bba"
 [[package]]
 name = "types"
 version = "0.2.1"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "arbitrary",
  "bls",
@@ -7222,7 +7100,7 @@ dependencies = [
  "tempfile",
  "test_random_derive",
  "tree_hash",
- "tree_hash_derive 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tree_hash_derive",
 ]
 
 [[package]]
@@ -7331,7 +7209,7 @@ checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 [[package]]
 name = "unused_port"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 
 [[package]]
 name = "url"
@@ -7372,7 +7250,7 @@ dependencies = [
 [[package]]
 name = "validator_dir"
 version = "0.1.0"
-source = "git+https://github.com/ethDreamer/lighthouse?rev=f6f5b2bce89ceca79fe2c75e49c8271c8e40598e#f6f5b2bce89ceca79fe2c75e49c8271c8e40598e"
+source = "git+https://github.com/realbigsean/lighthouse?rev=2269a267b22c0400a892c7c4dca430f89ab8cf76#2269a267b22c0400a892c7c4dca430f89ab8cf76"
 dependencies = [
  "bls",
  "deposit_contract",
