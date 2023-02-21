@@ -18,12 +18,12 @@ tracing-error = "0.2.0"
 tracing-core = "0.1.21"
 color-eyre = {version = "0.6.0", features = ["color-spantrace"]}
 serde_json = "1.0.79"
-execution_layer = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-types = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-task_executor = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-sensitive_url = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
+execution_layer = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+types = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+task_executor = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+sensitive_url = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
 hex = "0.4.3"
@@ -40,14 +40,14 @@ futures = "0.3.24"
 lru = "0.7.1"
 
 [patch.crates-io]
-eth2_serde_utils = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2_ssz_types = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-tree_hash = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-tree_hash_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2_ssz = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
-eth2_hashing = { git = "https://github.com/realbigsean/lighthouse", rev = "2269a267b22c0400a892c7c4dca430f89ab8cf76" }
+eth2_serde_utils = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2_ssz_types = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+tree_hash = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+tree_hash_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2_ssz = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
+eth2_hashing = { git = "https://github.com/realbigsean/lighthouse", rev = "185319dae4982ac3b20a1429d566624d5234dbd6" }
 arbitrary = { git = "https://github.com/michaelsproul/arbitrary", rev="a572fd8743012a4f1ada5ee5968b1b3619c427ba" }
 
 [patch."https://github.com/ralexstokes/mev-rs"]

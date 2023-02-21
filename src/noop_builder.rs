@@ -1,7 +1,7 @@
 use crate::payload_cache::PayloadCache;
 use crate::{convert_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{BlockId, ExecPayload, ExecutionPayload, ExecutionPayloadHeader, StateId};
+use eth2::types::{BlockId, ExecPayload, ExecutionPayload, StateId};
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
@@ -190,42 +190,23 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         let timestamp = parent_payload_header.timestamp()
             + (slot - parent_block.slot().as_u64()) * self.context.seconds_per_slot;
 
-        let payload = match fork_name {
-            ForkName::Merge => ExecutionPayload::Merge(ExecutionPayloadMerge {
-                parent_hash,
-                timestamp,
-                fee_recipient,
-                prev_randao,
-                block_number,
-                gas_limit,
-                ..Default::default()
-            }),
-            ForkName::Capella => ExecutionPayload::Capella(ExecutionPayloadCapella {
-                parent_hash,
-                timestamp,
-                fee_recipient,
-                prev_randao,
-                block_number,
-                gas_limit,
-                withdrawals: withdrawals_opt
-                    .ok_or(Error::Custom(
-                        "withdrawals required during capella".to_string(),
-                    ))?
-                    .data
-                    .withdrawals,
-                ..Default::default()
-            }),
-            _ => return Err(Error::Custom("fork not supported".to_string())),
-        };
-
-        self.payload_cache.put(payload.clone());
-
-        let header: ExecutionPayloadHeader<_> = payload.into();
-
         match fork_name {
             ForkName::Merge => {
+                let payload = ExecutionPayloadMerge {
+                    parent_hash,
+                    timestamp,
+                    fee_recipient,
+                    prev_randao,
+                    block_number,
+                    gas_limit,
+                    ..Default::default()
+                };
+
+                self.payload_cache
+                    .put(ExecutionPayload::Merge(payload.clone()));
+
                 let mut message = mev_rs::bellatrix::BuilderBid {
-                    header: to_ssz_rs(&header)?,
+                    header: to_ssz_rs(&payload)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
                 };
@@ -239,8 +220,27 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 Ok(signed_bid)
             }
             ForkName::Capella => {
+                let payload = ExecutionPayloadCapella {
+                    parent_hash,
+                    timestamp,
+                    fee_recipient,
+                    prev_randao,
+                    block_number,
+                    gas_limit,
+                    withdrawals: withdrawals_opt
+                        .ok_or(Error::Custom(
+                            "withdrawals required during capella".to_string(),
+                        ))?
+                        .data
+                        .withdrawals,
+                    ..Default::default()
+                };
+
+                self.payload_cache
+                    .put(ExecutionPayload::Capella(payload.clone()));
+
                 let mut message = mev_rs::capella::BuilderBid {
-                    header: to_ssz_rs(&header)?,
+                    header: to_ssz_rs(&payload)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
                 };
