@@ -7,6 +7,7 @@ edition = "2021"
 path = "src/lib.rs"
 
 [dependencies]
+arbitrary = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.14.0", features = ["macros", "rt", "rt-multi-thread", "signal" ] }
 clap = {version = "3.0.14", features = ["derive"]}
 serde = "1.0.136"
@@ -17,28 +18,41 @@ tracing-error = "0.2.0"
 tracing-core = "0.1.21"
 color-eyre = {version = "0.6.0", features = ["color-spantrace"]}
 serde_json = "1.0.79"
-execution_layer = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-types = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-task_executor = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-sensitive_url = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-eth2 = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+execution_layer = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+types = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+task_executor = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+sensitive_url = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
 hex = "0.4.3"
 slog = "2.7.0"
 sloggers = "2.1.1"
-mev-build-rs = {git = "https://github.com/ralexstokes/mev-rs", rev = "a088806575805c00d63fa59c002abc5eb1dc7709"}
 futures-channel = "0.3.21"
 tracing-slog = "0.1.0"
-ethereum-consensus = {git = "https://github.com/ralexstokes/ethereum-consensus", rev = "e1188b1" }
-ssz-rs = {git = "https://github.com/ralexstokes/ssz-rs", rev = "cb08f1" }
+mev-rs = { git = "https://github.com/realbigsean/mev-rs", rev = "2880443112ad59f4604633b07179a066d9efee77" }
+ethereum-consensus = { git = "https://github.com/ralexstokes/ethereum-consensus", rev = "9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d" }
+ssz-rs = { git = "https://github.com/ralexstokes/ssz-rs", rev = "adf1a0b14cef90b9536f28ef89da1fab316465e1" }
 async-trait = "0.1.51"
 rand = "0.8.5"
 futures = "0.3.24"
+lru = "0.7.1"
 
 [patch.crates-io]
-eth2_serde_utils = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-eth2_ssz_types = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-tree_hash = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-eth2_ssz = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
-eth2_hashing = { git = "https://github.com/michaelsproul/lighthouse", rev = "1ace774dc8105425c14050863ab73267cfc39ede" }
+eth2_serde_utils = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2_ssz_types = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+tree_hash = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+tree_hash_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2_ssz = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2_ssz_derive = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2 = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+eth2_hashing = { git = "https://github.com/realbigsean/lighthouse", rev = "50064098b21bfdb5d5cb682a555971740c7e80c8" }
+arbitrary = { git = "https://github.com/michaelsproul/arbitrary", rev="a572fd8743012a4f1ada5ee5968b1b3619c427ba" }
+
+[patch."https://github.com/realbigsean/mev-rs"]
+mev-rs = { git = "https://github.com/realbigsean//mev-rs", rev = "2880443112ad59f4604633b07179a066d9efee77" }
+[patch."https://github.com/ralexstokes/ethereum-consensus"]
+ethereum-consensus = { git = "https://github.com/ralexstokes//ethereum-consensus", rev = "9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d" }
+[patch."https://github.com/ralexstokes/ssz-rs"]
+ssz-rs = { git = "https://github.com/ralexstokes//ssz-rs", rev = "adf1a0b14cef90b9536f28ef89da1fab316465e1" }

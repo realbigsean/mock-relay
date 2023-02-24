@@ -3,7 +3,7 @@ use color_eyre::eyre::eyre;
 use eth2::Timeouts;
 use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
-use mev_build_rs::BlindedBlockProviderServer;
+use mev_rs::BlindedBlockProviderServer;
 use mock_relay::{NoOpBuilder, NoOpConfig};
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
@@ -127,11 +127,11 @@ async fn main() -> color_eyre::eyre::Result<()> {
         tracing::info!("Initialized no-op builder");
 
         let pubkey = noop_builder.pubkey();
-        tracing::info!("Builder pubkey: {pubkey:#x}");
+        tracing::info!("Builder pubkey: {pubkey:?}");
 
         BlindedBlockProviderServer::new(relay_config.address, relay_config.port, noop_builder)
-            .run()
-            .await;
+            .serve()
+            .await?;
     } else {
         let url = SensitiveUrl::parse(relay_config.execution_endpoint.as_str())
             .map_err(|e| eyre!(format!("{e:?}")))?;
@@ -169,11 +169,11 @@ async fn main() -> color_eyre::eyre::Result<()> {
         tracing::info!("Initialized mock builder");
 
         let pubkey = mock_builder.pubkey();
-        tracing::info!("Builder pubkey: {pubkey:#x}");
+        tracing::info!("Builder pubkey: {pubkey:?}");
 
         BlindedBlockProviderServer::new(relay_config.address, relay_config.port, mock_builder)
-            .run()
-            .await;
+            .serve()
+            .await?;
     };
 
     tracing::info!("Shutdown complete.");
