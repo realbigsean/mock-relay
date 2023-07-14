@@ -51,8 +51,8 @@ eth2_hashing = { git = "https://github.com/realbigsean/lighthouse", rev = "50064
 arbitrary = { git = "https://github.com/michaelsproul/arbitrary", rev="a572fd8743012a4f1ada5ee5968b1b3619c427ba" }
 
 [patch."https://github.com/realbigsean/mev-rs"]
-mev-rs = { git = "https://github.com/realbigsean//mev-rs", rev = "2880443112ad59f4604633b07179a066d9efee77" }
+mev-rs = { git = "https://github.com/jimmygchen/mev-rs", rev = "16b9797e12e0cf3f3f185fa0e4e363093751387d" }
 [patch."https://github.com/ralexstokes/ethereum-consensus"]
-ethereum-consensus = { git = "https://github.com/ralexstokes//ethereum-consensus", rev = "9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d" }
+ethereum-consensus = { git = "https://github.com/jimmygchen/ethereum-consensus", rev = "4d402897c87901f11616c71f000ea0c1f2863a38" }
 [patch."https://github.com/ralexstokes/ssz-rs"]
 ssz-rs = { git = "https://github.com/ralexstokes//ssz-rs", rev = "adf1a0b14cef90b9536f28ef89da1fab316465e1" }

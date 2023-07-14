@@ -174,6 +174,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "anvil-rpc"
+version = "0.1.0"
+source = "git+https://github.com/foundry-rs/foundry?rev=b45456717ffae1af65acdc71099f8cb95e6683a0#b45456717ffae1af65acdc71099f8cb95e6683a0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "anyhow"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -404,7 +413,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acee9fd5073ab6b045a275b3e709c163dd36c90685219cb21804a147b58dba43"
 dependencies = [
  "async-trait",
- "axum-core",
+ "axum-core 0.2.9",
  "bitflags",
  "bytes",
  "futures-util",
@@ -412,13 +421,46 @@ dependencies = [
  "http-body",
  "hyper",
  "itoa",
- "matchit",
+ "matchit 0.5.0",
  "memchr",
  "mime",
  "percent-encoding",
  "pin-project-lite 0.2.9",
  "serde",
  "serde_json",
+ "serde_urlencoded",
+ "sync_wrapper",
+ "tokio",
+ "tower",
+ "tower-http",
+ "tower-layer",
+ "tower-service",
+]
+
+[[package]]
+name = "axum"
+version = "0.6.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2fb79c228270dcf2426e74864cabc94babb5dbab01a4314e702d2f16540e1591"
+dependencies = [
+ "async-trait",
+ "axum-core 0.3.3",
+ "bitflags",
+ "bytes",
+ "futures-util",
+ "http",
+ "http-body",
+ "hyper",
+ "itoa",
+ "matchit 0.7.0",
+ "memchr",
+ "mime",
+ "percent-encoding",
+ "pin-project-lite 0.2.9",
+ "rustversion",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
  "serde_urlencoded",
  "sync_wrapper",
  "tokio",
@@ -440,6 +482,23 @@ dependencies = [
  "http",
  "http-body",
  "mime",
+ "tower-layer",
+ "tower-service",
+]
+
+[[package]]
+name = "axum-core"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2f958c80c248b34b9a877a643811be8dbca03ca5ba827f2b63baf3a81e5fc4e"
+dependencies = [
+ "async-trait",
+ "bytes",
+ "futures-util",
+ "http",
+ "http-body",
+ "mime",
+ "rustversion",
  "tower-layer",
  "tower-service",
 ]
@@ -492,9 +551,27 @@ checksum = "b645a089122eccb6111b4f81cbc1a49f5900ac4666bb93ac027feaecf15607bf"
 [[package]]
 name = "beacon-api-client"
 version = "0.1.0"
+source = "git+https://github.com/ralexstokes/beacon-api-client?rev=93d7e8c#93d7e8c38fe9782c4862909663e7b57c44f805a9"
+dependencies = [
+ "ethereum-consensus 0.1.1 (git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38)",
+ "http",
+ "itertools",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "url",
+]
+
+[[package]]
+name = "beacon-api-client"
+version = "0.1.0"
 source = "git+https://github.com/ralexstokes/beacon-api-client#53690a711e33614d59d4d44fb09762b4699e2a4e"
 dependencies = [
- "ethereum-consensus",
+ "ethereum-consensus 0.1.1 (git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38)",
  "http",
  "itertools",
  "reqwest",
@@ -1950,6 +2027,30 @@ dependencies = [
 [[package]]
 name = "ethereum-consensus"
 version = "0.1.1"
+source = "git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38#4d402897c87901f11616c71f000ea0c1f2863a38"
+dependencies = [
+ "async-stream",
+ "blst",
+ "bs58",
+ "enr",
+ "hex",
+ "integer-sqrt",
+ "multiaddr 0.14.0",
+ "multihash",
+ "rand 0.8.5",
+ "serde",
+ "serde_json",
+ "serde_yaml",
+ "sha2 0.9.9",
+ "ssz_rs",
+ "thiserror",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
+name = "ethereum-consensus"
+version = "0.1.1"
 source = "git+https://github.com/ralexstokes//ethereum-consensus?rev=9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d#9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d"
 dependencies = [
  "async-stream",
@@ -2045,7 +2146,7 @@ dependencies = [
  "eth2_serde_utils",
  "eth2_ssz",
  "eth2_ssz_types",
- "ethereum-consensus",
+ "ethereum-consensus 0.1.1 (git+https://github.com/ralexstokes//ethereum-consensus?rev=9b0ee0a8a45b968c8df5e7e64ea1c094e16f053d)",
  "ethers-core",
  "exit-future",
  "fork_choice",
@@ -2058,7 +2159,7 @@ dependencies = [
  "lazy_static",
  "lighthouse_metrics",
  "lru 0.7.8",
- "mev-rs",
+ "mev-rs 0.2.1",
  "parking_lot 0.12.1",
  "rand 0.8.5",
  "reqwest",
@@ -3803,6 +3904,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73cbba799671b762df5a175adf59ce145165747bb891505c43d09aefbbf38beb"
 
 [[package]]
+name = "matchit"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b87248edafb776e59e6ee64a79086f65890d3510f2c656c000bf2a7e8a0aea40"
+
+[[package]]
 name = "md-5"
 version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3875,12 +3982,33 @@ version = "0.2.1"
 source = "git+https://github.com/realbigsean//mev-rs?rev=2880443112ad59f4604633b07179a066d9efee77#2880443112ad59f4604633b07179a066d9efee77"
 dependencies = [
  "async-trait",
- "axum",
- "beacon-api-client",
- "ethereum-consensus",
+ "axum 0.5.17",
+ "beacon-api-client 0.1.0 (git+https://github.com/ralexstokes/beacon-api-client)",
+ "ethereum-consensus 0.1.1 (git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38)",
  "hyper",
  "serde",
  "ssz-rs",
+ "thiserror",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "mev-rs"
+version = "0.3.0"
+source = "git+https://github.com/jimmygchen/mev-rs?rev=16b9797e12e0cf3f3f185fa0e4e363093751387d#16b9797e12e0cf3f3f185fa0e4e363093751387d"
+dependencies = [
+ "anvil-rpc",
+ "async-trait",
+ "axum 0.6.7",
+ "beacon-api-client 0.1.0 (git+https://github.com/ralexstokes/beacon-api-client?rev=93d7e8c)",
+ "ethereum-consensus 0.1.1 (git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38)",
+ "hyper",
+ "parking_lot 0.12.1",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "ssz_rs",
  "thiserror",
  "tokio",
  "tracing",
@@ -3939,14 +4067,14 @@ dependencies = [
  "color-eyre",
  "eth2",
  "eth2_ssz_derive",
- "ethereum-consensus",
+ "ethereum-consensus 0.1.1 (git+https://github.com/jimmygchen/ethereum-consensus?rev=4d402897c87901f11616c71f000ea0c1f2863a38)",
  "execution_layer",
  "exit-future",
  "futures",
  "futures-channel",
  "hex",
  "lru 0.7.8",
- "mev-rs",
+ "mev-rs 0.3.0",
  "parking_lot 0.12.1",
  "rand 0.8.5",
  "sensitive_url",
@@ -5822,6 +5950,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_path_to_error"
+version = "0.1.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0b1b6471d7496b051e03f1958802a73f88b947866f5146f329e47e36554f4e55"
+dependencies = [
+ "itoa",
+ "serde",
+]
+
+[[package]]
 name = "serde_repr"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6224,6 +6362,31 @@ dependencies = [
 name = "ssz-rs-derive"
 version = "0.8.0"
 source = "git+https://github.com/ralexstokes//ssz-rs?rev=adf1a0b14cef90b9536f28ef89da1fab316465e1#adf1a0b14cef90b9536f28ef89da1fab316465e1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "ssz_rs"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "057291e5631f280978fa9c8009390663ca4613359fc1318e36a8c24c392f6d1f"
+dependencies = [
+ "bitvec 1.0.1",
+ "hex",
+ "num-bigint",
+ "serde",
+ "sha2 0.9.9",
+ "ssz_rs_derive",
+]
+
+[[package]]
+name = "ssz_rs_derive"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f07d54c4d01a1713eb363b55ba51595da15f6f1211435b71466460da022aa140"
 dependencies = [
  "proc-macro2",
  "quote",
