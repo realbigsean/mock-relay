@@ -1,22 +1,28 @@
 use crate::payload_cache::PayloadCache;
-use crate::{convert_err, from_ssz_rs, to_ssz_rs};
+use crate::{convert_err,from_ssz_rs,to_ssz_rs, custom_err};
 use async_trait::async_trait;
-use eth2::types::{BlockId, ExecPayload, ExecutionPayload, StateId};
+use eth2::types::{BlockId, ExecutionOptimisticResponse, ExecutionPayload, StateId};
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
 use futures::future;
 use mev_rs::{
-    sign_builder_message, verify_signed_builder_message, BidRequest, BlindedBlockProvider,
-    BlindedBlockProviderError as Error, ExecutionPayload as ServerPayload,
-    SignedBlindedBeaconBlock, SignedBuilderBid, SignedValidatorRegistration,
+    signing::{sign_builder_message, verify_signed_builder_message},
+    types::{
+        BidRequest, ExecutionPayload as ServerPayload, SignedBlindedBeaconBlock, SignedBuilderBid,
+        SignedValidatorRegistration,
+    },
+    {BlindedBlockProvider, Error as MevError},
 };
 use parking_lot::RwLock;
+use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::fmt::Debug;
 use std::sync::Arc;
 use types::{
-    Address, ChainSpec, EthSpec, ExecutionPayloadCapella, ExecutionPayloadMerge, ForkName,
+    Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadAndBlobs, ExecutionPayloadCapella,
+    ExecutionPayloadDeneb, ExecutionPayloadMerge, ForkName, FullPayloadContents, Withdrawals,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
@@ -66,7 +72,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
     async fn register_validators(
         &self,
         registrations: &mut [SignedValidatorRegistration],
-    ) -> Result<(), Error> {
+    ) -> Result<(), MevError> {
         for registration in registrations {
             let pubkey = registration.message.public_key.clone();
             let message = &mut registration.message;
@@ -85,7 +91,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         Ok(())
     }
 
-    async fn fetch_best_bid(&self, bid_request: &BidRequest) -> Result<SignedBuilderBid, Error> {
+    async fn fetch_best_bid(&self, bid_request: &BidRequest) -> Result<SignedBuilderBid, MevError> {
         let slot = bid_request.slot;
 
         let fork_name = self.spec.fork_name_at_slot::<E>(slot.into());
@@ -99,9 +105,9 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         .default_fee_recipient
                         .map(|fee_recipient| (fee_recipient, DEFAULT_GAS_LIMIT))
                         .ok_or_else(|| {
-                            Error::Custom(format!(
-                                "missing registration and no default fee recipient set"
-                            ))
+                            custom_err(
+                                "missing registration and no default fee recipient set".to_string()
+                            )
                         })
                 },
                 |registration| {
@@ -123,37 +129,41 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     .get_beacon_states_randao(StateId::Head, None)
                     .await
                     .map(|res| {
-                        Ok::<_, Error>(
+                        Ok::<_, MevError>(
                             res.ok_or_else(|| {
-                                Error::Custom(format!("no prev_randao returned from BN"))
+                                custom_err("no prev_randao returned from BN".to_string())
                             })?
                             .data
                             .randao,
                         )
                     })
-                    .map_err(|e| {
-                        Error::Custom(format!("unable to fetch prev_randao from BN: {e:?}"))
-                    })
+                    .map_err(|e| custom_err(format!("unable to fetch prev_randao from BN: {e:?}")))
             },
             async {
                 self.beacon_client
                     .get_beacon_blinded_blocks_ssz::<E>(BlockId::Head, &self.spec)
                     .await
                     .map_err(|e| {
-                        Error::Custom(format!("unable to get previous block from BN: {e:?}"))
+                        custom_err(format!("unable to get previous block from BN: {e:?}"))
                     })?
-                    .ok_or_else(|| Error::Custom(format!("head block missing from BN")))
+                    .ok_or_else(|| custom_err("head block missing from BN".to_string()))
             },
             async {
                 match fork_name {
                     ForkName::Base | ForkName::Altair | ForkName::Merge => Ok(None),
-                    ForkName::Capella | ForkName::Eip4844 => self
-                        .beacon_client
-                        .get_lighthouse_withdrawals::<E>(StateId::Head)
-                        .await
-                        .map_err(|e| {
-                            Error::Custom(format!("unable to get withdrawals from BN: {e:?}"))
-                        }),
+                    ForkName::Capella | ForkName::Deneb => {
+                        Result::<_, MevError>::Ok(
+                            Option::<ExecutionOptimisticResponse<ExpectedWithdrawals<E>>>::None,
+                        )
+                        // FIXME: PR waiting to be merged: https://github.com/sigp/lighthouse/pull/4390
+                        // self
+                        //     .beacon_client
+                        //     .get_expected_withdrawals::<E>(StateId::Head)
+                        //     .await
+                        //     .map_err(|e| {
+                        //         custom_err(format!("unable to get withdrawals from BN: {e:?}"))
+                        //     })
+                    }
                 }
             },
         )
@@ -168,7 +178,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         let parent_payload_header = parent_block.message().body().execution_payload().unwrap();
 
         if parent_payload_header.block_hash() != parent_hash {
-            return Err(Error::Custom(format!(
+            return Err(custom_err(format!(
                 "parent hash mismatch, BN: {:?} vs request: {:?}",
                 parent_payload_header.block_hash(),
                 parent_hash
@@ -176,7 +186,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         }
 
         if parent_block.slot() >= slot {
-            return Err(Error::Custom(format!(
+            return Err(custom_err(format!(
                 "incompatible parent slot, BN: {} vs request: {}",
                 parent_block.slot(),
                 slot
@@ -203,9 +213,11 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 };
 
                 self.payload_cache
-                    .put(ExecutionPayload::Merge(payload.clone()));
+                    .put(FullPayloadContents::Payload(ExecutionPayload::Merge(
+                        payload.clone(),
+                    )));
 
-                let mut message = mev_rs::bellatrix::BuilderBid {
+                let mut message = mev_rs::types::bellatrix::BuilderBid {
                     header: to_ssz_rs(&payload)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
@@ -213,10 +225,11 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
 
                 let signature =
                     sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
-                let signed_bid = SignedBuilderBid::Bellatrix(mev_rs::bellatrix::SignedBuilderBid {
-                    message,
-                    signature,
-                });
+                let signed_bid =
+                    SignedBuilderBid::Bellatrix(mev_rs::types::bellatrix::SignedBuilderBid {
+                        message,
+                        signature,
+                    });
                 Ok(signed_bid)
             }
             ForkName::Capella => {
@@ -228,7 +241,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     block_number,
                     gas_limit,
                     withdrawals: withdrawals_opt
-                        .ok_or(Error::Custom(
+                        .ok_or(custom_err(
                             "withdrawals required during capella".to_string(),
                         ))?
                         .data
@@ -237,9 +250,11 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 };
 
                 self.payload_cache
-                    .put(ExecutionPayload::Capella(payload.clone()));
+                    .put(FullPayloadContents::Payload(ExecutionPayload::Capella(
+                        payload.clone(),
+                    )));
 
-                let mut message = mev_rs::capella::BuilderBid {
+                let mut message = mev_rs::types::capella::BuilderBid {
                     header: to_ssz_rs(&payload)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
@@ -247,33 +262,80 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
 
                 let signature =
                     sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
-                let signed_bid = SignedBuilderBid::Capella(mev_rs::capella::SignedBuilderBid {
+                let signed_bid =
+                    SignedBuilderBid::Capella(mev_rs::types::capella::SignedBuilderBid {
+                        message,
+                        signature,
+                    });
+                Ok(signed_bid)
+            }
+            ForkName::Deneb => {
+                let payload = ExecutionPayloadDeneb {
+                    parent_hash,
+                    timestamp,
+                    fee_recipient,
+                    prev_randao,
+                    block_number,
+                    gas_limit,
+                    withdrawals: withdrawals_opt
+                        .ok_or(custom_err("withdrawals required during deneb".to_string()))?
+                        .data
+                        .withdrawals,
+                    ..Default::default()
+                };
+
+                self.payload_cache.put(FullPayloadContents::PayloadAndBlobs(
+                    ExecutionPayloadAndBlobs {
+                        execution_payload: ExecutionPayload::Deneb(payload.clone()),
+                        blobs_bundle: <_>::default(),
+                    },
+                ));
+
+                let mut message = mev_rs::types::deneb::BuilderBid {
+                    header: to_ssz_rs(&payload)?,
+                    blinded_blobs_bundle: <_>::default(),
+                    value: ssz_rs::U256::default(),
+                    public_key: self.builder_sk.public_key(),
+                };
+
+                let signature =
+                    sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
+                let signed_bid = SignedBuilderBid::Deneb(mev_rs::types::deneb::SignedBuilderBid {
                     message,
                     signature,
                 });
                 Ok(signed_bid)
             }
-            _ => return Err(Error::Custom("fork not supported".to_string())),
+            _ => return Err(custom_err("fork not supported".to_string())),
         }
     }
 
     async fn open_bid(
         &self,
         signed_block: &mut SignedBlindedBeaconBlock,
-    ) -> Result<ServerPayload, Error> {
+    ) -> Result<ServerPayload, MevError> {
         let root = from_ssz_rs(signed_block.block_hash())?;
-        let payload = self
+        let full_payload_contents = self
             .payload_cache
             .pop(&root)
             .ok_or(convert_err("payload cache miss"))?;
-        match payload {
-            ExecutionPayload::Merge(payload_inner) => {
-                Ok(ServerPayload::Bellatrix(to_ssz_rs(&payload_inner)?))
+        match full_payload_contents.payload_ref() {
+            ExecutionPayload::Merge(_) => {
+                Ok(ServerPayload::Bellatrix(to_ssz_rs(&full_payload_contents)?))
             }
-            ExecutionPayload::Capella(payload_inner) => {
-                Ok(ServerPayload::Capella(to_ssz_rs(&payload_inner)?))
+            ExecutionPayload::Capella(_) => {
+                Ok(ServerPayload::Capella(to_ssz_rs(&full_payload_contents)?))
             }
-            _ => Err(Error::Custom("unsupported fork".to_string())),
+            ExecutionPayload::Deneb(_) => {
+                Ok(ServerPayload::Deneb(to_ssz_rs(&full_payload_contents)?))
+            }
         }
     }
+}
+
+// FIXME: placeholder, to be replaced once #4390 is merged
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(bound = "E: EthSpec")]
+pub struct ExpectedWithdrawals<E: EthSpec> {
+    pub withdrawals: Withdrawals<E>,
 }

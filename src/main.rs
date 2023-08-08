@@ -3,7 +3,7 @@ use color_eyre::eyre::eyre;
 use eth2::Timeouts;
 use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
-use mev_rs::BlindedBlockProviderServer;
+use mev_rs::blinded_block_provider::Server as BlindedBlockProviderServer;
 use mock_relay::{NoOpBuilder, NoOpConfig};
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
@@ -14,7 +14,6 @@ use task_executor::ShutdownReason;
 use tracing::{instrument, Level};
 use tracing_core::LevelFilter;
 use tracing_error::ErrorLayer;
-use tracing_subscriber;
 use tracing_subscriber::prelude::*;
 use types::{Address, ChainSpec, MainnetEthSpec};
 
