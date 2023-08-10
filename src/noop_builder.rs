@@ -1,7 +1,7 @@
 use crate::payload_cache::PayloadCache;
-use crate::{convert_err,from_ssz_rs,to_ssz_rs, custom_err};
+use crate::{convert_err, custom_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{BlockId, ExecutionOptimisticResponse, ExecutionPayload, StateId};
+use eth2::types::{BlockId, ExecutionPayload, StateId};
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
@@ -16,13 +16,11 @@ use mev_rs::{
     {BlindedBlockProvider, Error as MevError},
 };
 use parking_lot::RwLock;
-use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::fmt::Debug;
 use std::sync::Arc;
 use types::{
     Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadAndBlobs, ExecutionPayloadCapella,
-    ExecutionPayloadDeneb, ExecutionPayloadMerge, ForkName, FullPayloadContents, Withdrawals,
+    ExecutionPayloadDeneb, ExecutionPayloadMerge, ForkName, FullPayloadContents,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
@@ -106,7 +104,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         .map(|fee_recipient| (fee_recipient, DEFAULT_GAS_LIMIT))
                         .ok_or_else(|| {
                             custom_err(
-                                "missing registration and no default fee recipient set".to_string()
+                                "missing registration and no default fee recipient set".to_string(),
                             )
                         })
                 },
@@ -151,19 +149,14 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
             async {
                 match fork_name {
                     ForkName::Base | ForkName::Altair | ForkName::Merge => Ok(None),
-                    ForkName::Capella | ForkName::Deneb => {
-                        Result::<_, MevError>::Ok(
-                            Option::<ExecutionOptimisticResponse<ExpectedWithdrawals<E>>>::None,
-                        )
-                        // FIXME: PR waiting to be merged: https://github.com/sigp/lighthouse/pull/4390
-                        // self
-                        //     .beacon_client
-                        //     .get_expected_withdrawals::<E>(StateId::Head)
-                        //     .await
-                        //     .map_err(|e| {
-                        //         custom_err(format!("unable to get withdrawals from BN: {e:?}"))
-                        //     })
-                    }
+                    ForkName::Capella | ForkName::Deneb => self
+                        .beacon_client
+                        .get_expected_withdrawals(&StateId::Head)
+                        .await
+                        .map_err(|e| {
+                            custom_err(format!("unable to get withdrawals from BN: {e:?}"))
+                        })
+                        .map(Some),
                 }
             },
         )
@@ -245,7 +238,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                             "withdrawals required during capella".to_string(),
                         ))?
                         .data
-                        .withdrawals,
+                        .into(),
                     ..Default::default()
                 };
 
@@ -280,7 +273,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     withdrawals: withdrawals_opt
                         .ok_or(custom_err("withdrawals required during deneb".to_string()))?
                         .data
-                        .withdrawals,
+                        .into(),
                     ..Default::default()
                 };
 
@@ -331,11 +324,4 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
             }
         }
     }
-}
-
-// FIXME: placeholder, to be replaced once #4390 is merged
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(bound = "E: EthSpec")]
-pub struct ExpectedWithdrawals<E: EthSpec> {
-    pub withdrawals: Withdrawals<E>,
 }

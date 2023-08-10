@@ -18,11 +18,11 @@ tracing-error = "0.2.0"
 tracing-core = "0.1.21"
 color-eyre = {version = "0.6.0", features = ["color-spantrace"]}
 serde_json = "1.0.79"
-execution_layer = { git = "https://github.com/jimmygchen/lighthouse", rev = "72a9f8032450189abb14ec0a252373c273bd0a3e" }
-types = { git = "https://github.com/jimmygchen/lighthouse", rev = "72a9f8032450189abb14ec0a252373c273bd0a3e" }
-task_executor = { git = "https://github.com/jimmygchen/lighthouse", rev = "72a9f8032450189abb14ec0a252373c273bd0a3e" }
-sensitive_url = { git = "https://github.com/jimmygchen/lighthouse", rev = "72a9f8032450189abb14ec0a252373c273bd0a3e" }
-eth2 = { git = "https://github.com/jimmygchen/lighthouse", rev = "72a9f8032450189abb14ec0a252373c273bd0a3e" }
+execution_layer = { git = "https://github.com/jimmygchen/lighthouse", rev = "ea1492e053a03506118f8b6786bad6253c26ff90" }
+types = { git = "https://github.com/jimmygchen/lighthouse", rev = "ea1492e053a03506118f8b6786bad6253c26ff90" }
+task_executor = { git = "https://github.com/jimmygchen/lighthouse", rev = "ea1492e053a03506118f8b6786bad6253c26ff90" }
+sensitive_url = { git = "https://github.com/jimmygchen/lighthouse", rev = "ea1492e053a03506118f8b6786bad6253c26ff90" }
+eth2 = { git = "https://github.com/jimmygchen/lighthouse", rev = "ea1492e053a03506118f8b6786bad6253c26ff90" }
 ethereum_ssz_derive = "0.5.0"
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
