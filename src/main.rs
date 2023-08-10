@@ -60,7 +60,7 @@ struct MockRelay {
     #[clap(
         long,
         help = "Fee recipient to use in case of missing registration.",
-        requires("empty_payloads")
+        requires("empty-payloads")
     )]
     default_fee_recipient: Option<Address>,
     #[clap(
