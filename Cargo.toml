@@ -40,6 +40,6 @@ futures = "0.3.24"
 lru = "0.7.1"
 
 [patch."https://github.com/ralexstokes/ethereum-consensus"]
-ethereum-consensus = { git = "https://github.com/ralexstokes//ethereum-consensus", rev = "56418ea" }
+ethereum-consensus = { git = "https://github.com/jimmygchen//ethereum-consensus", rev = "14cb3ce" }
 [patch."https://github.com/ralexstokes/mev-rs"]
 mev-rs = { git = "https://github.com/ralexstokes//mev-rs", rev = "9d88a2386b58c2948fa850f0dd4b3dfe18bd4962" }
