@@ -20,7 +20,8 @@ use std::collections::HashMap;
 use std::sync::Arc;
 use types::{
     Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadAndBlobs, ExecutionPayloadCapella,
-    ExecutionPayloadDeneb, ExecutionPayloadMerge, ForkName, FullPayloadContents,
+    ExecutionPayloadDeneb, ExecutionPayloadHeaderCapella, ExecutionPayloadHeaderDeneb,
+    ExecutionPayloadHeaderMerge, ExecutionPayloadMerge, ForkName, FullPayloadContents,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
@@ -210,8 +211,10 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         payload.clone(),
                     )));
 
+                let header: ExecutionPayloadHeaderMerge<E> = (&payload).into();
+
                 let mut message = mev_rs::types::bellatrix::BuilderBid {
-                    header: to_ssz_rs(&payload)?,
+                    header: to_ssz_rs(&header)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
                 };
@@ -247,8 +250,10 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         payload.clone(),
                     )));
 
+                let header: ExecutionPayloadHeaderCapella<E> = (&payload).into();
+
                 let mut message = mev_rs::types::capella::BuilderBid {
-                    header: to_ssz_rs(&payload)?,
+                    header: to_ssz_rs(&header)?,
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
                 };
@@ -284,8 +289,10 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     },
                 ));
 
+                let header: ExecutionPayloadHeaderDeneb<E> = (&payload).into();
+
                 let mut message = mev_rs::types::deneb::BuilderBid {
-                    header: to_ssz_rs(&payload)?,
+                    header: to_ssz_rs(&header)?,
                     blinded_blobs_bundle: <_>::default(),
                     value: ssz_rs::U256::default(),
                     public_key: self.builder_sk.public_key(),
