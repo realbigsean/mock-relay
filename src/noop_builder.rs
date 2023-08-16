@@ -1,7 +1,9 @@
 use crate::payload_cache::PayloadCache;
 use crate::{convert_err, custom_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{BlockId, ExecutionPayload, StateId};
+use eth2::types::{
+    BlockId, ExecutionPayload, ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
+};
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
@@ -19,9 +21,9 @@ use parking_lot::RwLock;
 use std::collections::HashMap;
 use std::sync::Arc;
 use types::{
-    Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadAndBlobs, ExecutionPayloadCapella,
-    ExecutionPayloadDeneb, ExecutionPayloadHeaderCapella, ExecutionPayloadHeaderDeneb,
-    ExecutionPayloadHeaderMerge, ExecutionPayloadMerge, ForkName, FullPayloadContents,
+    Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadCapella, ExecutionPayloadDeneb,
+    ExecutionPayloadHeaderCapella, ExecutionPayloadHeaderDeneb, ExecutionPayloadHeaderMerge,
+    ExecutionPayloadMerge, ForkName,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;

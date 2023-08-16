@@ -1,6 +1,7 @@
+use eth2::types::FullPayloadContents;
 use lru::LruCache;
 use parking_lot::Mutex;
-use types::{EthSpec, ExecutionBlockHash, FullPayloadContents};
+use types::{EthSpec, ExecutionBlockHash};
 
 pub const DEFAULT_PAYLOAD_CACHE_SIZE: usize = 10;
 

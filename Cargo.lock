@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "account_utils"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "directory",
  "eth2_keystore",
@@ -463,7 +463,7 @@ checksum = "8c3c1a368f70d6cf7302d78f8f7093da241fb8e8807c05cc9e51a125895a6d5b"
 [[package]]
 name = "beacon-api-client"
 version = "0.1.0"
-source = "git+https://github.com/ralexstokes/beacon-api-client?rev=56a290c#56a290ca9d2c67086917a0929cdf2fe35e5f917f"
+source = "git+https://github.com/ralexstokes//beacon-api-client?rev=cc6ff93b2d9c8a428e9c94b3cdfcc074ab5c44bd#cc6ff93b2d9c8a428e9c94b3cdfcc074ab5c44bd"
 dependencies = [
  "clap 4.3.21",
  "ethereum-consensus",
@@ -573,7 +573,7 @@ checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
 [[package]]
 name = "bls"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "arbitrary",
  "blst",
@@ -619,7 +619,7 @@ dependencies = [
 [[package]]
 name = "builder_client"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "eth2",
  "lighthouse_version",
@@ -680,7 +680,7 @@ dependencies = [
 [[package]]
 name = "c-kzg"
 version = "0.1.0"
-source = "git+https://github.com/ethereum//c-kzg-4844?rev=13cec820c08f45318f82ed4e0da0300042758b92#13cec820c08f45318f82ed4e0da0300042758b92"
+source = "git+https://github.com/ethereum//c-kzg-4844?rev=fa3c62989527073fdce8b2138bb27a52bb2407c5#fa3c62989527073fdce8b2138bb27a52bb2407c5"
 dependencies = [
  "bindgen",
  "cc",
@@ -693,7 +693,7 @@ dependencies = [
 [[package]]
 name = "c-kzg"
 version = "0.1.0"
-source = "git+https://github.com/ethereum/c-kzg-4844?rev=13cec820c08f45318f82ed4e0da0300042758b92#13cec820c08f45318f82ed4e0da0300042758b92"
+source = "git+https://github.com/ethereum/c-kzg-4844?rev=fa3c62989527073fdce8b2138bb27a52bb2407c5#fa3c62989527073fdce8b2138bb27a52bb2407c5"
 dependencies = [
  "bindgen",
  "cc",
@@ -706,7 +706,7 @@ dependencies = [
 [[package]]
 name = "cached_tree_hash"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum-types 0.14.1",
  "ethereum_hashing",
@@ -899,7 +899,7 @@ checksum = "2da6da31387c7e4ef160ffab6d5e7f00c42626fe39aea70a7b0f1773f7dd6c1b"
 [[package]]
 name = "clap_utils"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "clap 2.34.0",
  "dirs",
@@ -958,12 +958,12 @@ checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 [[package]]
 name = "compare_fields"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 
 [[package]]
 name = "compare_fields_derive"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -1277,7 +1277,7 @@ dependencies = [
 [[package]]
 name = "deposit_contract"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethabi 16.0.0",
  "ethereum_ssz",
@@ -1373,7 +1373,7 @@ dependencies = [
 [[package]]
 name = "directory"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "clap 2.34.0",
  "clap_utils",
@@ -1642,7 +1642,7 @@ dependencies = [
 [[package]]
 name = "environment"
 version = "0.1.2"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ctrlc",
  "eth2_config",
@@ -1696,7 +1696,7 @@ dependencies = [
 [[package]]
 name = "eth2"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "account_utils",
  "bytes",
@@ -1722,13 +1722,14 @@ dependencies = [
  "slashing_protection",
  "ssz_types",
  "store",
+ "tree_hash",
  "types",
 ]
 
 [[package]]
 name = "eth2_config"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "paste",
  "types",
@@ -1737,7 +1738,7 @@ dependencies = [
 [[package]]
 name = "eth2_interop_keypairs"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "bls",
  "ethereum_hashing",
@@ -1752,7 +1753,7 @@ dependencies = [
 [[package]]
 name = "eth2_key_derivation"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "bls",
  "num-bigint-dig",
@@ -1764,7 +1765,7 @@ dependencies = [
 [[package]]
 name = "eth2_keystore"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "aes",
  "bls",
@@ -1786,7 +1787,7 @@ dependencies = [
 [[package]]
 name = "eth2_network_config"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "discv5",
  "eth2_config",
@@ -1801,7 +1802,7 @@ dependencies = [
 [[package]]
 name = "eth2_wallet"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "eth2_key_derivation",
  "eth2_keystore",
@@ -1876,7 +1877,7 @@ dependencies = [
 [[package]]
 name = "ethereum-consensus"
 version = "0.1.1"
-source = "git+https://github.com/ralexstokes//ethereum-consensus?rev=56418ea#56418ea4c376470c7d75eb12f75bc882e1a92ca6"
+source = "git+https://github.com/ralexstokes//ethereum-consensus?rev=d1c665f#d1c665f707bd0724e38e7b83b1a01a658da0aa21"
 dependencies = [
  "async-stream",
  "blst",
@@ -2010,7 +2011,7 @@ checksum = "0206175f82b8d6bf6652ff7d71a1e27fd2e4efde587fd368662814d6ec1d9ce0"
 [[package]]
 name = "execution_layer"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "async-trait",
  "builder_client",
@@ -2151,7 +2152,7 @@ dependencies = [
 [[package]]
 name = "filesystem"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "winapi",
  "windows-acl",
@@ -2216,7 +2217,7 @@ checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 [[package]]
 name = "fork_choice"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum_ssz",
  "ethereum_ssz_derive",
@@ -2932,7 +2933,7 @@ dependencies = [
 [[package]]
 name = "int_to_bytes"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "bytes",
 ]
@@ -3073,11 +3074,11 @@ dependencies = [
 [[package]]
 name = "kzg"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "arbitrary",
- "c-kzg 0.1.0 (git+https://github.com/ethereum//c-kzg-4844?rev=13cec820c08f45318f82ed4e0da0300042758b92)",
- "c-kzg 0.1.0 (git+https://github.com/ethereum/c-kzg-4844?rev=13cec820c08f45318f82ed4e0da0300042758b92)",
+ "c-kzg 0.1.0 (git+https://github.com/ethereum//c-kzg-4844?rev=fa3c62989527073fdce8b2138bb27a52bb2407c5)",
+ "c-kzg 0.1.0 (git+https://github.com/ethereum/c-kzg-4844?rev=fa3c62989527073fdce8b2138bb27a52bb2407c5)",
  "derivative",
  "ethereum_hashing",
  "ethereum_serde_utils",
@@ -3386,6 +3387,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "libp2p-mplex"
+version = "0.40.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93959ed08b6caf9810e067655e25f1362098797fef7c44d3103e63dcb6f0fabe"
+dependencies = [
+ "asynchronous-codec",
+ "bytes",
+ "futures",
+ "libp2p-core",
+ "libp2p-identity",
+ "log",
+ "nohash-hasher",
+ "parking_lot 0.12.1",
+ "rand 0.8.5",
+ "smallvec 1.11.0",
+ "unsigned-varint 0.7.1",
+]
+
+[[package]]
 name = "libp2p-noise"
 version = "0.43.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3574,7 +3594,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_metrics"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "lazy_static",
  "prometheus",
@@ -3583,7 +3603,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_network"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "delay_map",
  "directory",
@@ -3597,6 +3617,7 @@ dependencies = [
  "hex",
  "lazy_static",
  "libp2p",
+ "libp2p-mplex",
  "lighthouse_metrics",
  "lighthouse_version",
  "lru 0.7.8",
@@ -3630,7 +3651,7 @@ dependencies = [
 [[package]]
 name = "lighthouse_version"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "git-version",
  "target_info",
@@ -3667,7 +3688,7 @@ dependencies = [
 [[package]]
 name = "lockfile"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "fs2",
 ]
@@ -3681,7 +3702,7 @@ checksum = "b06a4cde4c0f271a446782e3eff8de789548ce57dbc8eca9292c27f4a42004b4"
 [[package]]
 name = "logging"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "chrono",
  "lazy_static",
@@ -3727,7 +3748,7 @@ dependencies = [
 [[package]]
 name = "lru_cache"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "fnv",
 ]
@@ -3813,7 +3834,7 @@ dependencies = [
 [[package]]
 name = "merkle_proof"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum-types 0.14.1",
  "ethereum_hashing",
@@ -3847,7 +3868,7 @@ dependencies = [
 [[package]]
 name = "mev-rs"
 version = "0.3.0"
-source = "git+https://github.com/ralexstokes//mev-rs?rev=9d88a2386b58c2948fa850f0dd4b3dfe18bd4962#9d88a2386b58c2948fa850f0dd4b3dfe18bd4962"
+source = "git+https://github.com/ralexstokes//mev-rs?rev=e01daedd1706c3ec9d70d7e2baf301f0ad3645f8#e01daedd1706c3ec9d70d7e2baf301f0ad3645f8"
 dependencies = [
  "anvil-rpc",
  "async-trait",
@@ -4728,7 +4749,7 @@ checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
 [[package]]
 name = "pretty_reqwest_error"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "reqwest",
  "sensitive_url",
@@ -4883,7 +4904,7 @@ dependencies = [
 [[package]]
 name = "proto_array"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum_ssz",
  "ethereum_ssz_derive",
@@ -5447,7 +5468,7 @@ checksum = "1ad4cc8da4ef723ed60bced201181d83791ad433213d8c24efffda1eec85d741"
 [[package]]
 name = "safe_arith"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 
 [[package]]
 name = "salsa20"
@@ -5609,7 +5630,7 @@ checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
 [[package]]
 name = "sensitive_url"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "serde",
  "url",
@@ -5840,7 +5861,7 @@ dependencies = [
 [[package]]
 name = "slashing_protection"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum_serde_utils",
  "filesystem",
@@ -5956,7 +5977,7 @@ dependencies = [
 [[package]]
 name = "slot_clock"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "lazy_static",
  "lighthouse_metrics",
@@ -6115,7 +6136,7 @@ dependencies = [
 [[package]]
 name = "state_processing"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "bls",
  "derivative",
@@ -6145,7 +6166,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "store"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "db-key",
  "directory",
@@ -6237,7 +6258,7 @@ dependencies = [
 [[package]]
 name = "swap_or_not_shuffle"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "ethereum-types 0.14.1",
  "ethereum_hashing",
@@ -6325,7 +6346,7 @@ checksum = "c63f48baada5c52e65a29eef93ab4f8982681b67f9e8d29c7b05abcfec2b9ffe"
 [[package]]
 name = "task_executor"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "exit-future",
  "futures",
@@ -6372,7 +6393,7 @@ dependencies = [
 [[package]]
 name = "test_random_derive"
 version = "0.2.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -6884,7 +6905,7 @@ checksum = "497961ef93d974e23eb6f433eb5fe1b7930b659f06d12dec6fc44a8f554c0bba"
 [[package]]
 name = "types"
 version = "0.2.1"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "arbitrary",
  "bls",
@@ -7030,7 +7051,7 @@ checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 [[package]]
 name = "unused_port"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "lazy_static",
  "lru_cache",
@@ -7073,7 +7094,7 @@ dependencies = [
 [[package]]
 name = "validator_dir"
 version = "0.1.0"
-source = "git+https://github.com/jimmygchen/lighthouse?rev=ea1492e053a03506118f8b6786bad6253c26ff90#ea1492e053a03506118f8b6786bad6253c26ff90"
+source = "git+https://github.com/jimmygchen/lighthouse?rev=66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8#66bcc8ad8e7f2742cc73c03fbb90cf4ca763dfc8"
 dependencies = [
  "bls",
  "deposit_contract",
