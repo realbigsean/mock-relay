@@ -18,11 +18,11 @@ tracing-error = "0.2.0"
 tracing-core = "0.1.21"
 color-eyre = {version = "0.6.0", features = ["color-spantrace"]}
 serde_json = "1.0.79"
-execution_layer = { git = "https://github.com/jimmygchen/lighthouse", rev = "5fab3acdcf73e0bd53c15b4e7939d8d636d27f06" }
-types = { git = "https://github.com/jimmygchen/lighthouse", rev = "5fab3acdcf73e0bd53c15b4e7939d8d636d27f06" }
-task_executor = { git = "https://github.com/jimmygchen/lighthouse", rev = "5fab3acdcf73e0bd53c15b4e7939d8d636d27f06" }
-sensitive_url = { git = "https://github.com/jimmygchen/lighthouse", rev = "5fab3acdcf73e0bd53c15b4e7939d8d636d27f06" }
-eth2 = { git = "https://github.com/jimmygchen/lighthouse", rev = "5fab3acdcf73e0bd53c15b4e7939d8d636d27f06" }
+execution_layer = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+types = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+task_executor = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+sensitive_url = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+eth2 = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
 ethereum_ssz_derive = "0.5.0"
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
@@ -31,8 +31,8 @@ slog = "2.7.0"
 sloggers = "2.1.1"
 futures-channel = "0.3.21"
 tracing-slog = "0.1.0"
-mev-rs = { git = "https://github.com/ralexstokes/mev-rs", rev = "e01daedd1706c3ec9d70d7e2baf301f0ad3645f8" }
-ethereum-consensus = { git = "https://github.com/ralexstokes/ethereum-consensus", rev = "d1c665f" }
+mev-rs = { git = "https://github.com/jimmygchen/mev-rs", rev = "dedc77a" }
+ethereum-consensus = { git = "https://github.com/ralexstokes/ethereum-consensus", rev = "12508c1f9b0c8f4bf4c5e9b6d441e840c1b37fd9" }
 ssz_rs = "0.9.0"
 async-trait = "0.1.51"
 rand = "0.8.5"
@@ -40,8 +40,6 @@ futures = "0.3.24"
 lru = "0.7.1"
 
 [patch."https://github.com/ralexstokes/ethereum-consensus"]
-ethereum-consensus = { git = "https://github.com/ralexstokes//ethereum-consensus", rev = "d1c665f" }
-[patch."https://github.com/ralexstokes/mev-rs"]
-mev-rs = { git = "https://github.com/ralexstokes//mev-rs", rev = "e01daedd1706c3ec9d70d7e2baf301f0ad3645f8" }
+ethereum-consensus = { git = "https://github.com/ralexstokes//ethereum-consensus", rev = "12508c1f9b0c8f4bf4c5e9b6d441e840c1b37fd9" }
 [patch."https://github.com/ralexstokes/beacon-api-client"]
-beacon-api-client = { git = "https://github.com/ralexstokes//beacon-api-client", rev = "cc6ff93b2d9c8a428e9c94b3cdfcc074ab5c44bd"}
+beacon-api-client = { git = "https://github.com/ralexstokes//beacon-api-client", rev = "7f28993615fde52d563dd601a0511c34fe9b7c38"}
