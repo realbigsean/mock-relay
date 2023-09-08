@@ -2,15 +2,18 @@ use crate::payload_cache::PayloadCache;
 use crate::{convert_err, custom_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
 use eth2::types::{
-    BlindedPayloadCapella, BlindedPayloadDeneb, BlindedPayloadMerge, BlockId, ExecutionPayload,
-    ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
+    BlindedPayloadCapella, BlindedPayloadDeneb, BlindedPayloadMerge, BlobsBundle, BlockId,
+    ExecutionPayload, ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
 };
 use eth2::BeaconNodeHttpClient;
+use eth2_network_config::get_trusted_setup;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
+use execution_layer::test_utils::generate_random_blobs;
 use execution_layer::ExecutionLayer;
 use futures::future;
+use kzg::Kzg;
 use mev_rs::{
     signing::{sign_builder_message, verify_signed_builder_message},
     types::{
@@ -22,6 +25,7 @@ use mev_rs::{
 use parking_lot::RwLock;
 use std::collections::HashMap;
 use std::sync::Arc;
+use types::builder_bid::BlindedBlobsBundle;
 use types::{
     map_blinded_payload_ref, Address, BlindedPayloadRef, ChainSpec, EthSpec, ExecPayload,
     ExecutionPayloadCapella, ExecutionPayloadDeneb, ExecutionPayloadHeaderCapella,
@@ -41,11 +45,13 @@ pub struct NoOpBuilder<E: EthSpec> {
     val_registration_cache: Arc<RwLock<HashMap<BlsPublicKey, SignedValidatorRegistration>>>,
     builder_sk: SecretKey,
     config: NoOpConfig,
+    kzg: Option<Arc<Kzg<E::Kzg>>>,
 }
 
 #[derive(Clone)]
 pub struct NoOpConfig {
     pub default_fee_recipient: Option<Address>,
+    pub enable_blob_txs: bool,
 }
 
 impl<E: EthSpec> NoOpBuilder<E> {
@@ -54,9 +60,23 @@ impl<E: EthSpec> NoOpBuilder<E> {
         spec: ChainSpec,
         context: Context,
         config: NoOpConfig,
-    ) -> Self {
+    ) -> Result<Self, String> {
         let sk = SecretKey::random(&mut rand::thread_rng()).unwrap();
-        Self {
+
+        let kzg = if config.enable_blob_txs {
+            let trusted_setup = serde_json::from_reader(get_trusted_setup::<E::Kzg>())
+                .map_err(|e| format!("Unable to read trusted setup file: {}", e))?;
+
+            Some(
+                Kzg::new_from_trusted_setup(trusted_setup)
+                    .map(Arc::new)
+                    .map_err(|e| format!("failed to load kzg from trusted setup: {:?}", e))?,
+            )
+        } else {
+            None
+        };
+
+        Ok(Self {
             beacon_client,
             spec,
             context: Arc::new(context),
@@ -64,7 +84,8 @@ impl<E: EthSpec> NoOpBuilder<E> {
             payload_cache: Arc::new(PayloadCache::default()),
             builder_sk: sk,
             config,
-        }
+            kzg,
+        })
     }
 
     pub fn pubkey(&self) -> BlsPublicKey {
@@ -306,6 +327,22 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     ..Default::default()
                 };
 
+                let blobs_bundle = match self.kzg.as_ref() {
+                    None => BlobsBundle::default(),
+                    // blob tx enabled, add a dummy blob to cover basic blob testing
+                    Some(kzg) => {
+                        let (blobs_bundle, transactions) =
+                            generate_random_blobs(1, kzg).map_err(custom_err)?;
+                        for tx in Vec::from(transactions) {
+                            payload
+                                .transactions
+                                .push(tx)
+                                .map_err(|_| custom_err("transactions are full".to_string()))?;
+                        }
+                        blobs_bundle
+                    }
+                };
+
                 payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
                     ExecutionPayloadRef::Deneb(&payload),
                     parent_block.canonical_root(),
@@ -315,15 +352,16 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 self.payload_cache.put(FullPayloadContents::PayloadAndBlobs(
                     ExecutionPayloadAndBlobs {
                         execution_payload: ExecutionPayload::Deneb(payload.clone()),
-                        blobs_bundle: <_>::default(),
+                        blobs_bundle: blobs_bundle.clone(),
                     },
                 ));
 
                 let header: ExecutionPayloadHeaderDeneb<E> = (&payload).into();
+                let blinded_blobs_bundle: BlindedBlobsBundle<E> = blobs_bundle.into();
 
                 let mut message = mev_rs::types::deneb::BuilderBid {
                     header: to_ssz_rs(&header)?,
-                    blinded_blobs_bundle: <_>::default(),
+                    blinded_blobs_bundle: to_ssz_rs(&blinded_blobs_bundle)?,
                     value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };

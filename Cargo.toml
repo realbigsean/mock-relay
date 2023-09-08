@@ -23,6 +23,8 @@ types = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382df
 task_executor = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
 sensitive_url = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
 eth2 = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+eth2_network_config = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
+kzg = { git = "https://github.com/jimmygchen/lighthouse", rev = "99058977382dfe2035e8f5b8dda03c71a34b40d9" }
 ethereum_ssz_derive = "0.5.0"
 exit-future = "0.2.0"
 parking_lot = "0.12.0"
