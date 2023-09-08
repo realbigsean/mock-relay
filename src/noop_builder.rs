@@ -2,12 +2,14 @@ use crate::payload_cache::PayloadCache;
 use crate::{convert_err, custom_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
 use eth2::types::{
-    BlockId, ExecutionPayload, ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
+    BlindedPayloadCapella, BlindedPayloadDeneb, BlindedPayloadMerge, BlockId, ExecutionPayload,
+    ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
 };
 use eth2::BeaconNodeHttpClient;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
+use execution_layer::ExecutionLayer;
 use futures::future;
 use mev_rs::{
     signing::{sign_builder_message, verify_signed_builder_message},
@@ -21,12 +23,14 @@ use parking_lot::RwLock;
 use std::collections::HashMap;
 use std::sync::Arc;
 use types::{
-    Address, ChainSpec, EthSpec, ExecPayload, ExecutionPayloadCapella, ExecutionPayloadDeneb,
-    ExecutionPayloadHeaderCapella, ExecutionPayloadHeaderDeneb, ExecutionPayloadHeaderMerge,
-    ExecutionPayloadMerge, ForkName,
+    map_blinded_payload_ref, Address, BlindedPayloadRef, ChainSpec, EthSpec, ExecPayload,
+    ExecutionPayloadCapella, ExecutionPayloadDeneb, ExecutionPayloadHeaderCapella,
+    ExecutionPayloadHeaderDeneb, ExecutionPayloadHeaderMerge, ExecutionPayloadMerge,
+    ExecutionPayloadRef, ForkName, Uint256,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
+const DEFAULT_BUILDER_PAYLOAD_VALUE_WEI: u64 = 20_000_000_000_000_000;
 
 #[derive(Clone)]
 pub struct NoOpBuilder<E: EthSpec> {
@@ -196,17 +200,27 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         let timestamp = parent_payload_header.timestamp()
             + (slot - parent_block.slot().as_u64()) * self.context.seconds_per_slot;
 
+        // Use the base fee from the previous block as it should remain unchanged (no transactions).
+        let base_fee_per_gas = get_base_fee_per_gas(parent_payload_header);
+
         match fork_name {
             ForkName::Merge => {
-                let payload = ExecutionPayloadMerge {
+                let mut payload = ExecutionPayloadMerge {
                     parent_hash,
                     timestamp,
                     fee_recipient,
                     prev_randao,
                     block_number,
                     gas_limit,
+                    base_fee_per_gas,
                     ..Default::default()
                 };
+
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Merge(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
 
                 self.payload_cache
                     .put(FullPayloadContents::Payload(ExecutionPayload::Merge(
@@ -217,7 +231,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
 
                 let mut message = mev_rs::types::bellatrix::BuilderBid {
                     header: to_ssz_rs(&header)?,
-                    value: ssz_rs::U256::default(),
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };
 
@@ -231,13 +245,14 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 Ok(signed_bid)
             }
             ForkName::Capella => {
-                let payload = ExecutionPayloadCapella {
+                let mut payload = ExecutionPayloadCapella {
                     parent_hash,
                     timestamp,
                     fee_recipient,
                     prev_randao,
                     block_number,
                     gas_limit,
+                    base_fee_per_gas,
                     withdrawals: withdrawals_opt
                         .ok_or(custom_err(
                             "withdrawals required during capella".to_string(),
@@ -246,6 +261,12 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         .into(),
                     ..Default::default()
                 };
+
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Capella(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
 
                 self.payload_cache
                     .put(FullPayloadContents::Payload(ExecutionPayload::Capella(
@@ -256,7 +277,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
 
                 let mut message = mev_rs::types::capella::BuilderBid {
                     header: to_ssz_rs(&header)?,
-                    value: ssz_rs::U256::default(),
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };
 
@@ -270,19 +291,26 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 Ok(signed_bid)
             }
             ForkName::Deneb => {
-                let payload = ExecutionPayloadDeneb {
+                let mut payload = ExecutionPayloadDeneb {
                     parent_hash,
                     timestamp,
                     fee_recipient,
                     prev_randao,
                     block_number,
                     gas_limit,
+                    base_fee_per_gas,
                     withdrawals: withdrawals_opt
                         .ok_or(custom_err("withdrawals required during deneb".to_string()))?
                         .data
                         .into(),
                     ..Default::default()
                 };
+
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Deneb(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
 
                 self.payload_cache.put(FullPayloadContents::PayloadAndBlobs(
                     ExecutionPayloadAndBlobs {
@@ -296,7 +324,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                 let mut message = mev_rs::types::deneb::BuilderBid {
                     header: to_ssz_rs(&header)?,
                     blinded_blobs_bundle: <_>::default(),
-                    value: ssz_rs::U256::default(),
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };
 
@@ -333,4 +361,11 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
             }
         }
     }
+}
+
+fn get_base_fee_per_gas<'a, E: EthSpec>(payload_header: BlindedPayloadRef<'a, E>) -> Uint256 {
+    map_blinded_payload_ref!(&'a _, payload_header, |payload, cons| {
+        cons(payload);
+        payload.execution_payload_header.base_fee_per_gas
+    })
 }
