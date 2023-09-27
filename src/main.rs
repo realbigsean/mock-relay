@@ -3,7 +3,7 @@ use color_eyre::eyre::eyre;
 use eth2::Timeouts;
 use ethereum_consensus::state_transition::Context;
 use execution_layer::Config;
-use mev_rs::BlindedBlockProviderServer;
+use mev_rs::blinded_block_provider::Server as BlindedBlockProviderServer;
 use mock_relay::{NoOpBuilder, NoOpConfig};
 use sensitive_url::SensitiveUrl;
 use slog::Logger;
@@ -14,7 +14,6 @@ use task_executor::ShutdownReason;
 use tracing::{instrument, Level};
 use tracing_core::LevelFilter;
 use tracing_error::ErrorLayer;
-use tracing_subscriber;
 use tracing_subscriber::prelude::*;
 use types::{Address, ChainSpec, MainnetEthSpec};
 
@@ -53,6 +52,14 @@ struct MockRelay {
     network: String,
     #[clap(
         long,
+        short = 'b',
+        help = "Adding this flag will cause the payload to be populated with \
+        a blob transaction, and the minimal fields to be considered valid by the consensus layer, \
+        other fields will be defaulted."
+    )]
+    blob_txs: bool,
+    #[clap(
+        long,
         short = 'e',
         help = "Adding this flag will cause the payload to be populated with \
         the minimal fields to be considered valid by the consensus layer, other fields will be defaulted."
@@ -61,7 +68,7 @@ struct MockRelay {
     #[clap(
         long,
         help = "Fee recipient to use in case of missing registration.",
-        requires("empty_payloads")
+        requires("empty-payloads")
     )]
     default_fee_recipient: Option<Address>,
     #[clap(
@@ -118,12 +125,13 @@ async fn main() -> color_eyre::eyre::Result<()> {
         spec.genesis_fork_version = bytes;
     };
 
-    if relay_config.empty_payloads {
+    if relay_config.empty_payloads || relay_config.blob_txs {
         let noop_config = NoOpConfig {
             default_fee_recipient: relay_config.default_fee_recipient,
+            enable_blob_txs: relay_config.blob_txs,
         };
         let noop_builder: NoOpBuilder<MainnetEthSpec> =
-            NoOpBuilder::new(beacon_client, spec, context, noop_config);
+            NoOpBuilder::new(beacon_client, spec, context, noop_config).map_err(|e| eyre!(e))?;
         tracing::info!("Initialized no-op builder");
 
         let pubkey = noop_builder.pubkey();

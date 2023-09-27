@@ -1,25 +1,40 @@
 use crate::payload_cache::PayloadCache;
-use crate::{convert_err, from_ssz_rs, to_ssz_rs};
+use crate::{convert_err, custom_err, from_ssz_rs, to_ssz_rs};
 use async_trait::async_trait;
-use eth2::types::{BlockId, ExecPayload, ExecutionPayload, StateId};
+use eth2::types::{
+    BlindedPayloadCapella, BlindedPayloadDeneb, BlindedPayloadMerge, BlobsBundle, BlockId,
+    ExecutionPayload, ExecutionPayloadAndBlobs, FullPayloadContents, StateId,
+};
 use eth2::BeaconNodeHttpClient;
+use eth2_network_config::get_trusted_setup;
 use ethereum_consensus::crypto::SecretKey;
 use ethereum_consensus::primitives::BlsPublicKey;
 pub use ethereum_consensus::state_transition::Context;
+use execution_layer::test_utils::generate_random_blobs;
+use execution_layer::ExecutionLayer;
 use futures::future;
+use kzg::Kzg;
 use mev_rs::{
-    sign_builder_message, verify_signed_builder_message, BidRequest, BlindedBlockProvider,
-    BlindedBlockProviderError as Error, ExecutionPayload as ServerPayload,
-    SignedBlindedBeaconBlock, SignedBuilderBid, SignedValidatorRegistration,
+    signing::{sign_builder_message, verify_signed_builder_message},
+    types::{
+        BidRequest, ExecutionPayload as ServerPayload, SignedBlindedBeaconBlock, SignedBuilderBid,
+        SignedValidatorRegistration,
+    },
+    {BlindedBlockProvider, Error as MevError},
 };
 use parking_lot::RwLock;
 use std::collections::HashMap;
 use std::sync::Arc;
+use types::builder_bid::BlindedBlobsBundle;
 use types::{
-    Address, ChainSpec, EthSpec, ExecutionPayloadCapella, ExecutionPayloadMerge, ForkName,
+    map_blinded_payload_ref, Address, BlindedPayloadRef, ChainSpec, EthSpec, ExecPayload,
+    ExecutionPayloadCapella, ExecutionPayloadDeneb, ExecutionPayloadHeaderCapella,
+    ExecutionPayloadHeaderDeneb, ExecutionPayloadHeaderMerge, ExecutionPayloadMerge,
+    ExecutionPayloadRef, ForkName, Uint256,
 };
 
 const DEFAULT_GAS_LIMIT: u64 = 30_000_000;
+const DEFAULT_BUILDER_PAYLOAD_VALUE_WEI: u64 = 20_000_000_000_000_000;
 
 #[derive(Clone)]
 pub struct NoOpBuilder<E: EthSpec> {
@@ -30,11 +45,13 @@ pub struct NoOpBuilder<E: EthSpec> {
     val_registration_cache: Arc<RwLock<HashMap<BlsPublicKey, SignedValidatorRegistration>>>,
     builder_sk: SecretKey,
     config: NoOpConfig,
+    kzg: Option<Arc<Kzg<E::Kzg>>>,
 }
 
 #[derive(Clone)]
 pub struct NoOpConfig {
     pub default_fee_recipient: Option<Address>,
+    pub enable_blob_txs: bool,
 }
 
 impl<E: EthSpec> NoOpBuilder<E> {
@@ -43,9 +60,23 @@ impl<E: EthSpec> NoOpBuilder<E> {
         spec: ChainSpec,
         context: Context,
         config: NoOpConfig,
-    ) -> Self {
+    ) -> Result<Self, String> {
         let sk = SecretKey::random(&mut rand::thread_rng()).unwrap();
-        Self {
+
+        let kzg = if config.enable_blob_txs {
+            let trusted_setup = serde_json::from_reader(get_trusted_setup::<E::Kzg>())
+                .map_err(|e| format!("Unable to read trusted setup file: {}", e))?;
+
+            Some(
+                Kzg::new_from_trusted_setup(trusted_setup)
+                    .map(Arc::new)
+                    .map_err(|e| format!("failed to load kzg from trusted setup: {:?}", e))?,
+            )
+        } else {
+            None
+        };
+
+        Ok(Self {
             beacon_client,
             spec,
             context: Arc::new(context),
@@ -53,7 +84,8 @@ impl<E: EthSpec> NoOpBuilder<E> {
             payload_cache: Arc::new(PayloadCache::default()),
             builder_sk: sk,
             config,
-        }
+            kzg,
+        })
     }
 
     pub fn pubkey(&self) -> BlsPublicKey {
@@ -66,7 +98,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
     async fn register_validators(
         &self,
         registrations: &mut [SignedValidatorRegistration],
-    ) -> Result<(), Error> {
+    ) -> Result<(), MevError> {
         for registration in registrations {
             let pubkey = registration.message.public_key.clone();
             let message = &mut registration.message;
@@ -85,7 +117,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         Ok(())
     }
 
-    async fn fetch_best_bid(&self, bid_request: &BidRequest) -> Result<SignedBuilderBid, Error> {
+    async fn fetch_best_bid(&self, bid_request: &BidRequest) -> Result<SignedBuilderBid, MevError> {
         let slot = bid_request.slot;
 
         let fork_name = self.spec.fork_name_at_slot::<E>(slot.into());
@@ -99,9 +131,9 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                         .default_fee_recipient
                         .map(|fee_recipient| (fee_recipient, DEFAULT_GAS_LIMIT))
                         .ok_or_else(|| {
-                            Error::Custom(format!(
-                                "missing registration and no default fee recipient set"
-                            ))
+                            custom_err(
+                                "missing registration and no default fee recipient set".to_string(),
+                            )
                         })
                 },
                 |registration| {
@@ -123,37 +155,36 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
                     .get_beacon_states_randao(StateId::Head, None)
                     .await
                     .map(|res| {
-                        Ok::<_, Error>(
+                        Ok::<_, MevError>(
                             res.ok_or_else(|| {
-                                Error::Custom(format!("no prev_randao returned from BN"))
+                                custom_err("no prev_randao returned from BN".to_string())
                             })?
                             .data
                             .randao,
                         )
                     })
-                    .map_err(|e| {
-                        Error::Custom(format!("unable to fetch prev_randao from BN: {e:?}"))
-                    })
+                    .map_err(|e| custom_err(format!("unable to fetch prev_randao from BN: {e:?}")))
             },
             async {
                 self.beacon_client
                     .get_beacon_blinded_blocks_ssz::<E>(BlockId::Head, &self.spec)
                     .await
                     .map_err(|e| {
-                        Error::Custom(format!("unable to get previous block from BN: {e:?}"))
+                        custom_err(format!("unable to get previous block from BN: {e:?}"))
                     })?
-                    .ok_or_else(|| Error::Custom(format!("head block missing from BN")))
+                    .ok_or_else(|| custom_err("head block missing from BN".to_string()))
             },
             async {
                 match fork_name {
                     ForkName::Base | ForkName::Altair | ForkName::Merge => Ok(None),
-                    ForkName::Capella | ForkName::Eip4844 => self
+                    ForkName::Capella | ForkName::Deneb => self
                         .beacon_client
-                        .get_lighthouse_withdrawals::<E>(StateId::Head)
+                        .get_expected_withdrawals(&StateId::Head)
                         .await
                         .map_err(|e| {
-                            Error::Custom(format!("unable to get withdrawals from BN: {e:?}"))
-                        }),
+                            custom_err(format!("unable to get withdrawals from BN: {e:?}"))
+                        })
+                        .map(Some),
                 }
             },
         )
@@ -168,7 +199,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         let parent_payload_header = parent_block.message().body().execution_payload().unwrap();
 
         if parent_payload_header.block_hash() != parent_hash {
-            return Err(Error::Custom(format!(
+            return Err(custom_err(format!(
                 "parent hash mismatch, BN: {:?} vs request: {:?}",
                 parent_payload_header.block_hash(),
                 parent_hash
@@ -176,7 +207,7 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         }
 
         if parent_block.slot() >= slot {
-            return Err(Error::Custom(format!(
+            return Err(custom_err(format!(
                 "incompatible parent slot, BN: {} vs request: {}",
                 parent_block.slot(),
                 slot
@@ -190,90 +221,189 @@ impl<E: EthSpec> BlindedBlockProvider for NoOpBuilder<E> {
         let timestamp = parent_payload_header.timestamp()
             + (slot - parent_block.slot().as_u64()) * self.context.seconds_per_slot;
 
+        // Use the base fee from the previous block as it should remain unchanged (no transactions).
+        let base_fee_per_gas = get_base_fee_per_gas(parent_payload_header);
+
         match fork_name {
             ForkName::Merge => {
-                let payload = ExecutionPayloadMerge {
+                let mut payload = ExecutionPayloadMerge {
                     parent_hash,
                     timestamp,
                     fee_recipient,
                     prev_randao,
                     block_number,
                     gas_limit,
+                    base_fee_per_gas,
                     ..Default::default()
                 };
 
-                self.payload_cache
-                    .put(ExecutionPayload::Merge(payload.clone()));
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Merge(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
 
-                let mut message = mev_rs::bellatrix::BuilderBid {
-                    header: to_ssz_rs(&payload)?,
-                    value: ssz_rs::U256::default(),
+                self.payload_cache
+                    .put(FullPayloadContents::Payload(ExecutionPayload::Merge(
+                        payload.clone(),
+                    )));
+
+                let header: ExecutionPayloadHeaderMerge<E> = (&payload).into();
+
+                let mut message = mev_rs::types::bellatrix::BuilderBid {
+                    header: to_ssz_rs(&header)?,
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };
 
                 let signature =
                     sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
-                let signed_bid = SignedBuilderBid::Bellatrix(mev_rs::bellatrix::SignedBuilderBid {
-                    message,
-                    signature,
-                });
+                let signed_bid =
+                    SignedBuilderBid::Bellatrix(mev_rs::types::bellatrix::SignedBuilderBid {
+                        message,
+                        signature,
+                    });
                 Ok(signed_bid)
             }
             ForkName::Capella => {
-                let payload = ExecutionPayloadCapella {
+                let mut payload = ExecutionPayloadCapella {
                     parent_hash,
                     timestamp,
                     fee_recipient,
                     prev_randao,
                     block_number,
                     gas_limit,
+                    base_fee_per_gas,
                     withdrawals: withdrawals_opt
-                        .ok_or(Error::Custom(
+                        .ok_or(custom_err(
                             "withdrawals required during capella".to_string(),
                         ))?
                         .data
-                        .withdrawals,
+                        .into(),
                     ..Default::default()
                 };
 
-                self.payload_cache
-                    .put(ExecutionPayload::Capella(payload.clone()));
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Capella(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
 
-                let mut message = mev_rs::capella::BuilderBid {
-                    header: to_ssz_rs(&payload)?,
-                    value: ssz_rs::U256::default(),
+                self.payload_cache
+                    .put(FullPayloadContents::Payload(ExecutionPayload::Capella(
+                        payload.clone(),
+                    )));
+
+                let header: ExecutionPayloadHeaderCapella<E> = (&payload).into();
+
+                let mut message = mev_rs::types::capella::BuilderBid {
+                    header: to_ssz_rs(&header)?,
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
                     public_key: self.builder_sk.public_key(),
                 };
 
                 let signature =
                     sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
-                let signed_bid = SignedBuilderBid::Capella(mev_rs::capella::SignedBuilderBid {
+                let signed_bid =
+                    SignedBuilderBid::Capella(mev_rs::types::capella::SignedBuilderBid {
+                        message,
+                        signature,
+                    });
+                Ok(signed_bid)
+            }
+            ForkName::Deneb => {
+                let mut payload = ExecutionPayloadDeneb {
+                    parent_hash,
+                    timestamp,
+                    fee_recipient,
+                    prev_randao,
+                    block_number,
+                    gas_limit,
+                    base_fee_per_gas,
+                    withdrawals: withdrawals_opt
+                        .ok_or(custom_err("withdrawals required during deneb".to_string()))?
+                        .data
+                        .into(),
+                    ..Default::default()
+                };
+
+                let blobs_bundle = match self.kzg.as_ref() {
+                    None => BlobsBundle::default(),
+                    // blob tx enabled, add a dummy blob to cover basic blob testing
+                    Some(kzg) => {
+                        let (blobs_bundle, transactions) =
+                            generate_random_blobs(1, kzg).map_err(custom_err)?;
+                        for tx in Vec::from(transactions) {
+                            payload
+                                .transactions
+                                .push(tx)
+                                .map_err(|_| custom_err("transactions are full".to_string()))?;
+                        }
+                        blobs_bundle
+                    }
+                };
+
+                payload.block_hash = ExecutionLayer::calculate_execution_block_hash(
+                    ExecutionPayloadRef::Deneb(&payload),
+                    parent_block.canonical_root(),
+                )
+                .0;
+
+                self.payload_cache.put(FullPayloadContents::PayloadAndBlobs(
+                    ExecutionPayloadAndBlobs {
+                        execution_payload: ExecutionPayload::Deneb(payload.clone()),
+                        blobs_bundle: blobs_bundle.clone(),
+                    },
+                ));
+
+                let header: ExecutionPayloadHeaderDeneb<E> = (&payload).into();
+                let blinded_blobs_bundle: BlindedBlobsBundle<E> = blobs_bundle.into();
+
+                let mut message = mev_rs::types::deneb::BuilderBid {
+                    header: to_ssz_rs(&header)?,
+                    blinded_blobs_bundle: to_ssz_rs(&blinded_blobs_bundle)?,
+                    value: ssz_rs::U256::from(DEFAULT_BUILDER_PAYLOAD_VALUE_WEI),
+                    public_key: self.builder_sk.public_key(),
+                };
+
+                let signature =
+                    sign_builder_message(&mut message, &self.builder_sk, self.context.as_ref())?;
+                let signed_bid = SignedBuilderBid::Deneb(mev_rs::types::deneb::SignedBuilderBid {
                     message,
                     signature,
                 });
                 Ok(signed_bid)
             }
-            _ => return Err(Error::Custom("fork not supported".to_string())),
+            _ => return Err(custom_err("fork not supported".to_string())),
         }
     }
 
     async fn open_bid(
         &self,
         signed_block: &mut SignedBlindedBeaconBlock,
-    ) -> Result<ServerPayload, Error> {
+    ) -> Result<ServerPayload, MevError> {
         let root = from_ssz_rs(signed_block.block_hash())?;
-        let payload = self
+        let full_payload_contents = self
             .payload_cache
             .pop(&root)
             .ok_or(convert_err("payload cache miss"))?;
-        match payload {
-            ExecutionPayload::Merge(payload_inner) => {
-                Ok(ServerPayload::Bellatrix(to_ssz_rs(&payload_inner)?))
+        match full_payload_contents.payload_ref() {
+            ExecutionPayload::Merge(_) => {
+                Ok(ServerPayload::Bellatrix(to_ssz_rs(&full_payload_contents)?))
             }
-            ExecutionPayload::Capella(payload_inner) => {
-                Ok(ServerPayload::Capella(to_ssz_rs(&payload_inner)?))
+            ExecutionPayload::Capella(_) => {
+                Ok(ServerPayload::Capella(to_ssz_rs(&full_payload_contents)?))
             }
-            _ => Err(Error::Custom("unsupported fork".to_string())),
+            ExecutionPayload::Deneb(_) => {
+                Ok(ServerPayload::Deneb(to_ssz_rs(&full_payload_contents)?))
+            }
         }
     }
+}
+
+fn get_base_fee_per_gas<'a, E: EthSpec>(payload_header: BlindedPayloadRef<'a, E>) -> Uint256 {
+    map_blinded_payload_ref!(&'a _, payload_header, |payload, cons| {
+        cons(payload);
+        payload.execution_payload_header.base_fee_per_gas
+    })
 }
